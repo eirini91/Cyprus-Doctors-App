@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CyDr</string>
+    <string name="always_anonymous">Πάντα ανόνυμος</string>
+    <string name="save">Αποθήκευση</string>
+    <string name="language">Γλώσσα</string>
+    <string name="city">Πόλη</string>
+
+    <string name="larnaca">Λάρνακα</string>
+    <string name="limassol">Λεμεσός</string>
+    <string name="nicosia">Λευκωσία</string>
+    <string name="paphos">Πάφος</string>
+    <string name="famagusta">Αμμόχωστος</string>
+
+
+    <string name="english">Αγγλικά</string>
+    <string name="greek">Ελληνικά</string>
+    <string name="name">Όνομα</string>
+    <string name="rating">Βαθμολογία</string>
+    <string name="specialty">Ειδικότητα</string>
+    <string name="search">Αναζήτηση</string>
+    <string name="all">Όλες</string>
+
+</resources>

@@ -1,0 +1,30 @@
+<resources>
+    <string name="google_maps_key">AIzaSyDvCUkROJeEpzsQyvPygIveVXVsyTWeyXE</string>
+
+    <string name="app_name">CyDr</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="always_anonymous">Always Anonymous</string>
+    <string name="save">Save</string>
+    <string name="language">Language</string>
+    <string name="city">City</string>
+
+
+    <string name="larnaca">Larnaca</string>
+    <string name="limassol">Limassol</string>
+    <string name="nicosia">Nicosia</string>
+    <string name="paphos">Paphos</string>
+    <string name="famagusta">Famagusta</string>
+
+    <string name="english">English</string>
+    <string name="greek">Greek</string>
+    <string name="name">Name</string>
+    <string name="rating">Rating</string>
+    <string name="specialty">Specialty</string>
+    <string name="search">Search</string>
+    <string name="all">All</string>
+
+</resources>
