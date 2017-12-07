@@ -2,7 +2,12 @@
 <resources>
   <color name="colorPrimary">#09c2c4</color>
   <color name="colorPrimaryDark">#00464f</color>
-  <color name="colorAccent">#FF4081</color>
   <color name="colorPrimaryDarkTrans">#2600464f</color>
+  <color name="colorAccentDark">#159d77</color>
+    <color name="colorPrimaryDarkTransExtra">#0D00464f</color>
+
+  <color name="colorAccent">#1ed9a4</color>
+  <color name="textColour">#7e7e7e</color>
+  <color name="fbColour">#3B5998</color>
 
 </resources>

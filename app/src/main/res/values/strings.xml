@@ -1,24 +1,18 @@
 <resources>
     <string name="google_maps_key">AIzaSyDvCUkROJeEpzsQyvPygIveVXVsyTWeyXE</string>
-
     <string name="app_name">CyDr</string>
-
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-
     <string name="action_settings" translatable="false">Settings</string>
     <string name="always_anonymous">Always Anonymous</string>
     <string name="save">Save</string>
     <string name="language">Language</string>
     <string name="city">City</string>
-
-
     <string name="larnaca">Larnaca</string>
     <string name="limassol">Limassol</string>
     <string name="nicosia">Nicosia</string>
     <string name="paphos">Paphos</string>
     <string name="famagusta">Famagusta</string>
-
     <string name="english">English</string>
     <string name="greek">Greek</string>
     <string name="name">Name</string>
@@ -26,5 +20,90 @@
     <string name="specialty">Specialty</string>
     <string name="search">Search</string>
     <string name="all">All</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="facebook_app_id">1520843247993478</string>
+    <string name="fb_login_protocol_scheme">fb1520843247993478</string>
+    <string name="common_signin_fb_button_text_long">Sign in with Facebook</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="surname">Surname</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="top">Top</string>
+    <string name="top_doctors">Top doctors</string>
+    <string name="favourites">Favourites</string>
+    <string name="my_reviews">My reviews</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
 
+    <string-array name="specialties">
+        <item>Vascular Surgery</item>
+        <item>Hematology</item>
+        <item>RADIODYNOLOGY</item>
+        <item>RADIOTHERAPEUTIC-OCCOLOGYΑ</item>
+        <item>RADIOLOGY</item>
+        <item>ΑΛΛΕΡΓΙΟΛΟΓΙΑ</item>
+        <item>Allergology</item>
+        <item>GASTRENDEROLOGY</item>
+        <item>General medicine</item>
+        <item>GENERAL SURGERY</item>
+        <item>GERIATRICS</item>
+        <item>DERMATOLOGY-AFRODISIOLOGY</item>
+        <item>ENDOCRINOLOGY</item>
+        <item>SPECIALIZATION IN LEMOXIOLOGY</item>
+        <item>SPECIALIZATION IN INTENSIVE TREATMENT</item>
+        <item>SPECIALIZING INTEGRATED NON-GENE THERAPY</item>
+        <item>SPECIALIZED PAIDONEYROLOGY</item>
+        <item>MEDICAL TREATMENT</item>
+        <item>ΙΑΤΡΙΚΗΣ ΒΙΟΠΑΘΟΛΟΓΙΑΣ</item>
+        <item>MEDICAL BIOPATHOLOGY</item>
+        <item>DOCTOR</item>
+        <item>CARDIOLOGY</item>
+        <item>CARDIOLOGY - PATHOLOGY</item>
+        <item>Cytology</item>
+        <item>OBSTETRICS GYNECOLOGY</item>
+        <item>MICROBIOLOGY</item>
+        <item>NEUROLOGY</item>
+        <item>NEUROLOGY-PSYCHIATRIC</item>
+        <item>Neurosurgery</item>
+        <item>Nephrology</item>
+        <item>Orthopaedics</item>
+        <item>UROLOGY</item>
+        <item>Urology - GENERAL SURGERY</item>
+        <item>OPHTHALMOLOGY</item>
+        <item>PATHOLOGY</item>
+        <item>PATHOLOGY - GASTRENDEROLOGY</item>
+        <item>Medical oncology</item>
+        <item>PATHOLOGICAL-ANATOMY</item>
+        <item>PEDIATRICS</item>
+        <item>Pediatric Cardiologist</item>
+        <item>Child Psychiatry</item>
+        <item>Plastic surgery</item>
+        <item>Pulmonology - fymatologia</item>
+        <item>Nuclear medicine</item>
+        <item>Rheumatology</item>
+        <item>Oral and Maxillofacial surgery</item>
+        <item>HYGIENOLOGY - COMMUNITY MEDICINE</item>
+        <item>PHYSICAL MEDICINE AND RESTORATION</item>
+        <item>VASCULAR SURGERY</item>
+        <item>Thoracic surgery</item>
+        <item>PEDIATRIC SURGERY</item>
+        <item>Psychiatry</item>
+        <item>Otolaryngology</item>
+
+    </string-array>
+    <string name="title_activity_info">InfoActivity</string>
 </resources>

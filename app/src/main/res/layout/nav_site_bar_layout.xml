@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/nav_header_main"/>
+
+    <ScrollView
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/top_doctors"
+                android:layout_below="@id/search"
+                android:padding="8dp"
+                android:background="@drawable/primary_grey_ripple"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:src="@drawable/ic_star"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="8dp"
+
+                    android:text="@string/top_doctors"
+                    android:textAllCaps="true"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/search"
+                android:padding="8dp"
+                android:background="@drawable/primary_grey_ripple"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:src="@drawable/ic_search"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+
+                <TextView
+                    android:layout_marginLeft="8dp"
+                    android:textAllCaps="true"
+                    
+                    android:text="@string/search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/favourites"
+                android:layout_below="@+id/top_doctors"
+                android:padding="8dp"
+                android:background="@drawable/primary_grey_ripple"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:src="@drawable/ic_heart"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+
+                <TextView
+                    android:layout_marginLeft="8dp"
+                    android:textAllCaps="true"
+                    
+                    android:text="@string/favourites"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/first_divider"
+                android:layout_below="@id/favourites"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:id="@+id/my_reviews"
+                android:layout_below="@+id/first_divider"
+                android:padding="8dp"
+                android:background="@drawable/primary_grey_ripple"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:src="@drawable/ic_pencil"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+
+                <TextView
+                    android:layout_marginLeft="8dp"
+                    android:textAllCaps="true"
+                    
+                    android:text="@string/my_reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/settings"
+                android:layout_below="@+id/my_reviews"
+                android:padding="8dp"
+                android:background="@drawable/primary_grey_ripple"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:src="@drawable/ic_settings"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+
+                <TextView
+                    android:layout_marginLeft="8dp"
+                    android:textAllCaps="true"
+                    
+                    android:text="@string/settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/logout"
+                android:layout_below="@+id/settings"
+                android:padding="8dp"
+                android:background="@drawable/primary_grey_ripple"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:src="@drawable/logout"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+
+                <TextView
+                    android:layout_marginLeft="8dp"
+                    android:textAllCaps="true"
+                    
+                    android:text="@string/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <View
+                android:id="@+id/second_divider"
+                android:layout_below="@id/logout"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <LinearLayout
+                android:id="@+id/info"
+                android:layout_below="@+id/second_divider"
+                android:padding="8dp"
+                android:background="@drawable/primary_grey_ripple"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:src="@drawable/ic_info"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+
+                <TextView
+                    android:layout_marginLeft="8dp"
+                    android:textAllCaps="true"
+                    
+                    android:text="Info and Terms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <View
+                android:layout_below="@id/info"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</LinearLayout>

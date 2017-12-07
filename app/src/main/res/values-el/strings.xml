@@ -20,5 +20,80 @@
     <string name="specialty">Ειδικότητα</string>
     <string name="search">Αναζήτηση</string>
     <string name="all">Όλες</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="create_an_account">Create an account</string>
 
+    <string name="facebook_app_id">1520843247993478</string>
+    <string name="fb_login_protocol_scheme">fb1520843247993478</string>
+    <string name="common_signin_fb_button_text_long">Sign in with Facebook</string>
+
+
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="surname">Surname</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="top">ΤΟΠ</string>
+
+    <string name="top_doctors">Κορυφαίοι Ιατροί</string>
+    <string name="favourites">Favourites</string>
+    <string name="my_reviews">My reviews</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string-array name="specialties">
+        <item>ΑΓΓΕΙΟΧΕΙΡΟΥΡΓΙΚΗ</item>
+        <item>ΑΙΜΑΤΟΛΟΓΙΑ</item>
+        <item>ΑΚΤΙΝΟΔΙΑΓΝΩΣΤΙΚΗ</item>
+        <item>ΑΚΤΙΝΟΘΕΡΑΠΕΥΤΙΚΗ-ΟΓΚΟΛΟΓΙΑ</item>
+        <item>ΑΚΤΙΝΟΛΟΓΙΑ</item>
+        <item>ΑΛΛΕΡΓΙΟΛΟΓΙΑ</item>
+        <item>ΑΝΑΙΣΘΗΣΙΟΛΟΓΙΑ</item>
+        <item>ΓΑΣΤΡΕΝΤΕΡΟΛΟΓΙΑ</item>
+        <item>ΓΕΝΙΚΗ ΙΑΤΡΙΚΗ</item>
+        <item>ΓΕΝΙΚΗ ΧΕΙΡΟΥΡΓΙΚΗ</item>
+        <item>ΓΗΡΙΑΤΡΙΚΗ</item>
+        <item>ΔΕΡΜΑΤΟΛΟΓΙΑ-ΑΦΡΟΔΙΣΙΟΛΟΓΙΑ</item>
+        <item>ΕΝΔΟΚΡΙΝΟΛΟΓΙΑ</item>
+        <item>ΕΞΕΔΙΚΕΥΣΗ ΣΤΗΝ ΛΟΙΜΩΞΙΟΛΟΓΙΑ</item>
+        <item>ΕΞΕΙΔΙΚΕΥΣΗ ΕΝΤΑΤΙΚΗ ΘΕΡΑΠΕΙΑ</item>
+        <item>ΕΞΕΙΔΙΚΕΥΣΗ ΕΝΤΑΤΙΚΗ ΘΕΡΑΠΕΙΑ ΝΕΟΓΝΩΝ</item>
+        <item>ΕΞΕΙΔΙΚΕΥΣΗ ΠΑΙΔΟΝΕΥΡΟΛΟΓΙΑ</item>
+        <item>ΙΑΤΡΙΚΗ ΤΗΣ ΕΡΓΑΣΙΑΣ</item>
+        <item>ΙΑΤΡΙΚΗΣ ΒΙΟΠΑΘΟΛΟΓΙΑΣ</item>
+        <item>ΙΑΤΡΟΔΙΚΑΣΤΙΚΗ</item>
+        <item>ΙΑΤΡΟΣ</item>
+        <item>ΚΑΡΔΙΟΛΟΓΙΑ</item>
+        <item>ΚΑΡΔΙΟΛΟΓΙΑ - ΠΑΘΟΛΟΓΙΑ</item>
+        <item>ΚΥΤΤΑΡΟΛΟΓΙΑ</item>
+        <item>ΜΑΙΕΥΤΙΚΗ-ΓΥΝΑΙΚΟΛΟΓΙΑ</item>
+        <item>ΜΙΚΡΟΒΙΟΛΟΓΙΑ</item>
+        <item>ΝΕΥΡΟΛΟΓΙΑ</item>
+        <item>ΝΕΥΡΟΛΟΓΙΑ-ΨΥΧΙΑΤΡΙΚΗ</item>
+        <item>ΝΕΥΡΟΧΕΙΡΟΥΡΓΙΚΗ</item>
+        <item>ΝΕΦΡΟΛΟΓΙΑ</item>
+        <item>ΟΡΘΟΠΕΔΙΚΗ</item>
+        <item>ΟΥΡΟΛΟΓΙΑ</item>
+        <item>ΟΥΡΟΛΟΓΙΑ - ΓΕΝΙΚΗ ΧΕΙΡΟΥΡΓΙΚΗ</item>
+        <item>ΟΦΘΑΛΜΟΛΟΓΙΑ</item>
+        <item>ΠΑΘΟΛΟΓΙΑ</item>
+        <item>ΠΑΘΟΛΟΓΙΑ - ΓΑΣΤΡΕΝΤΕΡΟΛΟΓΙΑ</item>
+        <item>ΠΑΘΟΛΟΓΙΚΗ ΟΓΚΟΛΟΓΙΑ</item>
+        <item>ΠΑΘΟΛΟΓΙΚΗ-ΑΝΑΤΟΜΙΑ</item>
+        <item>ΠΑΙΔΙΑΤΡΙΚΗ</item>
+        <item>ΠΑΙΔΟΚΑΡΔΙΟΛΟΓΙΑ</item>
+        <item>ΠΑΙΔΟΨΥΧΙΑΤΡΙΚΗ</item>
+        <item>ΠΛΑΣΤΙΚΗ ΧΕΙΡΟΥΡΓΙΚΗ</item>
+        <item>ΠΝΕΥΜΟΝΟΛΟΓΙΑ-ΦΥΜΑΤΟΛΟΓΙΑ</item>
+        <item>ΠΥΡΗΝΙΚΗ ΙΑΤΡΙΚΗ</item>
+        <item>ΡΕΥΜΑΤΟΛΟΓΙΑ</item>
+        <item>ΣΤΟΜΑΤΟ-ΓΝΑΘ-ΠΡΟΣΩΠΟΧΕΙΡΟΥΡΓΙΚΗΣ</item>
+        <item>ΥΓΙΕΙΟΝΟΛΟΓΙΑ - ΚΟΙΝΟΤΙΚΗ ΙΑΤΡΙΚΗ</item>
+        <item>ΦΥΣΙΚΗΣ ΙΑΤΡΙΚΗΣ ΚΑΙ ΑΠΟΚΑΤΑΣΤΑΣΗΣ</item>
+        <item>ΧΕΙΡΟΥΡΓΙΚΗ ΑΓΓΕΙΩΝ</item>
+        <item>ΧΕΙΡΟΥΡΓΙΚΗ ΘΩΡΑΚΟΣ</item>
+        <item>ΧΕΙΡΟΥΡΓΙΚΗ ΠΑΙΔΩΝ</item>
+        <item>ΨΥΧΙΑΤΡΙΚΗ</item>
+        <item>ΩΤΟΡΙΝΟΛΑΡΥΓΓΟΛΟΓΙΑ</item>
+
+    </string-array>
 </resources>
