@@ -106,4 +106,10 @@
 
     </string-array>
     <string name="title_activity_info">InfoActivity</string>
+    <string name="website">Website</string>
+    <string name="call">Call</string>
+    <string name="sex">Sex</string>
+    <string name="sector">Sector</string>
+    <string name="university">University</string>
+    <string name="telephone">Telephone</string>
 </resources>

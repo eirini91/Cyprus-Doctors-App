@@ -3,6 +3,8 @@
   <color name="colorPrimary">#09c2c4</color>
   <color name="colorPrimaryDark">#00464f</color>
   <color name="colorPrimaryDarkTrans">#2600464f</color>
+  <color name="colorPrimaryDarkTransDark">#A600464f</color>
+
   <color name="colorAccentDark">#159d77</color>
     <color name="colorPrimaryDarkTransExtra">#0D00464f</color>
 

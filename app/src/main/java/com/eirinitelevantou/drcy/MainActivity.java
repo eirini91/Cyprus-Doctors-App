@@ -116,6 +116,8 @@ public class MainActivity extends BaseActivity {
             case R.id.info:
                 break;
             case R.id.search_category:
+                intent = new Intent(this, SpecialtyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.search_area:
                 intent = new Intent(this, CityListActivity.class);

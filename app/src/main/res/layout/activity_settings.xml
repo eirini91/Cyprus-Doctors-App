@@ -107,6 +107,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"/>
                 <Button
+                    android:background="@drawable/primary_ripple"
+android:textColor="@android:color/white"
                     android:id="@+id/btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
