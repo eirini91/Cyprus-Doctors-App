@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".DrApp"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
@@ -26,6 +27,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".DetailsActivity" />
+        <activity android:name=".AllDoctorsActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

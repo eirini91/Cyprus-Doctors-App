@@ -1,0 +1,146 @@
+package com.eirinitelevantou.drcy;
+
+import android.app.Application;
+
+import com.eirinitelevantou.drcy.model.Doctor;
+import com.eirinitelevantou.drcy.model.DoctorList;
+import com.eirinitelevantou.drcy.model.Specialty;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * Created by Eirini Televantou on 12/11/2017.
+ * televantou91@gmail.com
+ * For Castleton Technology PLC
+ */
+
+public class DrApp extends Application {
+    DoctorList doctors;
+    private List<Specialty> specialtyArrayList = new ArrayList<>();
+
+    private static  DrApp drApp;
+
+    public static  DrApp getInstance() {
+        return drApp;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        drApp =this;
+        setDoctors();
+        setSpecialties();
+
+    }
+    private void setSpecialties() {
+
+        String[] specialties = getResources().getStringArray(R.array.specialties);
+        int[] specialtiesId = getResources().getIntArray(R.array.specialties_ints);
+        ArrayList<Integer> drawables = new ArrayList<>();
+        drawables.add(R.drawable.vascular_surgery);
+        drawables.add(R.drawable.blood_sample);
+        drawables.add(R.drawable.x_ray);
+        drawables.add(R.drawable.x_ray);
+        drawables.add(R.drawable.x_ray);
+        drawables.add(R.drawable.allergy);
+        drawables.add(R.drawable.syringe);
+        drawables.add(R.drawable.intestines);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.scalpel);
+        drawables.add(R.drawable.old_man);
+        drawables.add(R.drawable.derma);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.microbe);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.lungs);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.microbe);
+        drawables.add(R.drawable.mirror);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.heart);
+        drawables.add(R.drawable.heart);
+        drawables.add(R.drawable.bacteria);
+        drawables.add(R.drawable.breast);
+        drawables.add(R.drawable.bacteria);
+        drawables.add(R.drawable.brain);
+        drawables.add(R.drawable.brain);
+        drawables.add(R.drawable.scalpel);
+        drawables.add(R.drawable.kidney);
+        drawables.add(R.drawable.kneecap);
+        drawables.add(R.drawable.uterus);
+        drawables.add(R.drawable.scalpel);
+        drawables.add(R.drawable.eye);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.girl);
+        drawables.add(R.drawable.girl);
+        drawables.add(R.drawable.girl);
+        drawables.add(R.drawable.scalpel);
+        drawables.add(R.drawable.lungs);
+        drawables.add(R.drawable.blood_sample);
+        drawables.add(R.drawable.knee);
+        drawables.add(R.drawable.articulation);
+        drawables.add(R.drawable.stethoscope);
+        drawables.add(R.drawable.crutches);
+        drawables.add(R.drawable.scalpel);
+        drawables.add(R.drawable.scalpel);
+        drawables.add(R.drawable.scalpel);
+        drawables.add(R.drawable.brain);
+        drawables.add(R.drawable.otoscope);
+
+
+        for (int i = 0; i < specialties.length; i++) {
+            Specialty specialty = new Specialty(specialtiesId[i],specialties[i], drawables.get(i));
+            specialtyArrayList.add(specialty);
+        }
+
+    }
+
+    public DoctorList getDoctors() {
+        return doctors;
+    }
+
+    private void setDoctors(){
+        doctors = new Gson().fromJson(loadJSONFromAsset(), DoctorList.class);
+
+    }
+    public void setDoctors(DoctorList doctors) {
+        this.doctors = doctors;
+    }
+
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = getAssets().open("drjson.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
+    public List<Specialty> getSpecialtyArrayList() {
+        return specialtyArrayList;
+    }
+
+    public void setSpecialtyArrayList(List<Specialty> specialtyArrayList) {
+        this.specialtyArrayList = specialtyArrayList;
+    }
+}

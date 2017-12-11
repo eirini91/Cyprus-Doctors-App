@@ -45,6 +45,7 @@
     <string name="sector">Sector</string>
     <string name="university">University</string>
     <string name="telephone">Telephone</string>
+    <string name="all_docs">All Doctors</string>
     <string-array name="specialties">
         <item>ΑΓΓΕΙΟΧΕΙΡΟΥΡΓΙΚΗ</item>
         <item>ΑΙΜΑΤΟΛΟΓΙΑ</item>
