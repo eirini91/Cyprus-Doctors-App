@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "638211234091",
+    "firebase_url": "https://fir-drcy.firebaseio.com",
+    "project_id": "firebase-drcy",
+    "storage_bucket": "firebase-drcy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638211234091:android:bc962f828cf1833c",
+        "android_client_info": {
+          "package_name": "com.eirinitelevantou.drcy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638211234091-6m18gg6blvaplr94jijcf7v2bihngh2a.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "638211234091-jksku2i68vt2fbb76uu9tls6fkigmuff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eirinitelevantou.drcy",
+            "certificate_hash": "319cdeb6fa0b546d08ca5e6a15565336d29d2cb8"
+          }
+        },
+        {
+          "client_id": "638211234091-old2eh24pimebkr4j5ta9ajal7thati6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkfOUtjJqdGYwCwl8PkWB-gUTVqFx7cGw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638211234091-6m18gg6blvaplr94jijcf7v2bihngh2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
