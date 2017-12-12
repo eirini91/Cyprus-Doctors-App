@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity {
 
 
 
-    @OnClick({R.id.top_doctors, R.id.favourites, R.id.my_reviews, R.id.settings, R.id.logout, R.id.info,R.id.search_category, R.id.search_area, R.id.search_rating, R.id.search})
+    @OnClick({R.id.side_search,R.id.all, R.id.top_doctors, R.id.favourites, R.id.my_reviews, R.id.settings, R.id.logout, R.id.info,R.id.search_category, R.id.search_area, R.id.search_rating, R.id.search})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -116,6 +116,8 @@ public class MainActivity extends BaseActivity {
             case R.id.info:
                 break;
             case R.id.search_category:
+                intent = new Intent(this, SpecialtyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.search_area:
                 intent = new Intent(this, CityListActivity.class);
@@ -123,8 +125,13 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.search_rating:
                 break;
+            case R.id.side_search:
             case R.id.search:
                 intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.all:
+                intent = new Intent(this, AllDoctorsActivity.class);
                 startActivity(intent);
                 break;
         }

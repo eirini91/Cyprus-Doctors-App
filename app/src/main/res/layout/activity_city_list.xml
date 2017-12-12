@@ -11,18 +11,16 @@
 
     <include layout="@layout/ab_main"/>
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:id="@+id/nicosia_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
-        app:cardUseCompatPadding="false">
+        android:background="@drawable/primary_grey_ripple"
+
+        android:clickable="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,10 +60,10 @@
                     android:text="@string/nicosia"/>
             </LinearLayout>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:id="@+id/limassol_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -114,10 +112,10 @@
                     android:text="@string/limassol"/>
             </LinearLayout>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:id="@+id/larnaca_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -165,10 +163,10 @@
                     android:text="@string/larnaca"/>
             </LinearLayout>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:id="@+id/paphos_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -215,10 +213,10 @@
                     android:text="@string/paphos"/>
             </LinearLayout>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:id="@+id/famagusta_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -266,6 +264,6 @@
                     android:text="@string/famagusta"/>
             </LinearLayout>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 </LinearLayout>
