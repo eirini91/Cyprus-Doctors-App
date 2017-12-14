@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.eirinitelevantou.drcy.InfoActivity">
+    tools:context="com.eirinitelevantou.drcy.activity.InfoActivity">
 
     <TextView
         android:text="Medical Icons made by Freepik https://www.flaticon.com/packs/medical-asserts/3 from www.flaticon.com "

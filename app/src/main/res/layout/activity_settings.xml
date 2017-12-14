@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
-    android:layout_height="match_parent">
+    android:orientation="vertical">
+
     <include layout="@layout/ab_main"/>
 
     <LinearLayout
@@ -37,6 +38,7 @@
                 android:text="Eirini Televantou"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"/>
+
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
@@ -47,9 +49,10 @@
 
 
         <ScrollView
-            android:fillViewport="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,21 +72,25 @@
                     android:text="@string/language"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"/>
+
                 <View
-                    android:background="@color/colorPrimaryDark"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"/>
+
                 <com.roughike.swipeselector.SwipeSelector
                     android:id="@+id/swipe_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
                     android:value="@+value/swipe_language"
-                    app:swipe_indicatorInActiveColor="@color/colorPrimary"
                     app:swipe_indicatorActiveColor="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp" />
+                    app:swipe_indicatorInActiveColor="@color/colorPrimary"/>
+
                 <View
-                    android:background="@color/colorPrimaryDark"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -91,28 +98,33 @@
                     android:text="@string/city"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"/>
+
                 <View
-                    android:background="@color/colorPrimaryDark"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"/>
+
                 <com.roughike.swipeselector.SwipeSelector
                     android:id="@+id/swipe_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
                     android:value="@+value/swipe_city"
-                    android:layout_width="match_parent"
-                    app:swipe_indicatorInActiveColor="@color/colorPrimary"
                     app:swipe_indicatorActiveColor="@color/colorPrimaryDark"
-                    android:layout_height="70dp" />
+                    app:swipe_indicatorInActiveColor="@color/colorPrimary"/>
+
                 <View
-                    android:background="@color/colorPrimaryDark"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"/>
+
                 <Button
-                    android:background="@drawable/primary_ripple"
-android:textColor="@android:color/white"
                     android:id="@+id/btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/save"/>
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/primary_ripple"
+                    android:text="@string/save"
+                    android:textColor="@android:color/white"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

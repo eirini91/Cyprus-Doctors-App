@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDarkTransExtra"
     android:orientation="vertical"
-    tools:context="com.eirinitelevantou.drcy.CityListActivity">
+    tools:context="com.eirinitelevantou.drcy.activity.CityListActivity">
 
     <include layout="@layout/ab_main"/>
 

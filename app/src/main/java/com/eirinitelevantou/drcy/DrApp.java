@@ -5,17 +5,16 @@ import android.app.Application;
 import com.eirinitelevantou.drcy.model.Doctor;
 import com.eirinitelevantou.drcy.model.DoctorList;
 import com.eirinitelevantou.drcy.model.Specialty;
+import com.eirinitelevantou.drcy.util.Prefs;
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by Eirini Televantou on 12/11/2017.
@@ -24,7 +23,7 @@ import java.util.List;
  */
 
 public class DrApp extends Application {
-    DoctorList doctors;
+    ArrayList<Doctor> doctors = new ArrayList<>();
     private List<Specialty> specialtyArrayList = new ArrayList<>();
 
     private static  DrApp drApp;
@@ -36,6 +35,9 @@ public class DrApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Realm.init(this);
+        Prefs.initPrefs(getApplicationContext());
+
         drApp =this;
         setDoctors();
         setSpecialties();
@@ -108,15 +110,27 @@ public class DrApp extends Application {
 
     }
 
-    public DoctorList getDoctors() {
+    public ArrayList<Doctor> getDoctors() {
         return doctors;
     }
 
     private void setDoctors(){
-        doctors = new Gson().fromJson(loadJSONFromAsset(), DoctorList.class);
+        RealmResults<Doctor> doctorRealmResults = Realm.getDefaultInstance().where(Doctor.class).findAll();
 
+        if(doctorRealmResults == null || doctorRealmResults.size()==0) {
+            doctors = new Gson().fromJson(loadJSONFromAsset(), DoctorList.class).getDoctors();
+
+            Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                 realm.copyToRealmOrUpdate(doctors);
+                }
+            });
+        }else{
+            doctors.addAll(doctorRealmResults);
+        }
     }
-    public void setDoctors(DoctorList doctors) {
+    public void setDoctors(ArrayList<Doctor> doctors) {
         this.doctors = doctors;
     }
 

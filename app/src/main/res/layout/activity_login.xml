@@ -162,6 +162,17 @@
                     android:text="@string/common_signin_button_text_long"
                     android:textColor="@android:color/white" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/skip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="right"
+                android:padding="4dp"
+                android:text="@string/skip"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

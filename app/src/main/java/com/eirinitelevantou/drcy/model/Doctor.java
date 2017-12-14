@@ -1,12 +1,22 @@
 package com.eirinitelevantou.drcy.model;
 
+import android.content.Context;
+
+import com.eirinitelevantou.drcy.DrApp;
+import com.eirinitelevantou.drcy.R;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by eirini.televantou on 07/12/2017.
  */
 
-public class Doctor {
+public class Doctor extends RealmObject {
 
     /**
      * Id : 2
@@ -22,6 +32,7 @@ public class Doctor {
      * Website : https://www.iator.com.cy/
      */
 
+    @PrimaryKey
     @SerializedName("Id")
     private int Id;
     @SerializedName("Name")
@@ -45,6 +56,8 @@ public class Doctor {
     @SerializedName("Website")
     private String Website;
 
+    private Double rating;
+
     public int getId() {
         return Id;
     }
@@ -63,6 +76,61 @@ public class Doctor {
 
     public String getSpeciality() {
         return Speciality;
+    }
+
+    public List<Integer> getSpecialities() {
+
+        List<Integer> list = new ArrayList<Integer>();
+        String specialties = Speciality.replaceAll("\\s+", "");
+        specialties = specialties + ",";
+        for (int i = 0, j, n = specialties.length(); i < n; i = j + 1) {
+            j = specialties.indexOf(",", i);
+            try {
+                list.add(Integer.parseInt(specialties.substring(i, j).trim()));
+
+            } catch (NumberFormatException nfe) {
+                System.out.println("Could not parse " + nfe);
+            }
+        }
+
+        return list;
+    }
+
+    public String getCommaSeparatedSpecialties() {
+        String specialties = "";
+        for (Specialty specialty1 : DrApp.getInstance().getSpecialtyArrayList()) {
+            if (getSpecialities().contains(specialty1.getId())) {
+                if (specialties.length() > 0) {
+                    specialties += ", ";
+                }
+                specialties += specialty1.getName();
+
+            }
+        }
+        return specialties;
+    }
+
+    public String getCityString(Context context) {
+        switch (getCity()) {
+            case 0: {
+                return context.getString(R.string.nicosia_cyprus);
+            }
+            case 1: {
+                return context.getString(R.string.limassol_cuprus);
+            }
+            case 2: {
+                return context.getString(R.string.larnaca_cyprus);
+            }
+            case 3: {
+                return context.getString(R.string.paphos_cyprus);
+            }
+            case 4: {
+                return context.getString(R.string.famagusta_cyprus);
+            }
+
+        }
+        return "";
+
     }
 
     public void setSpeciality(String Speciality) {
@@ -132,4 +200,13 @@ public class Doctor {
     public void setWebsite(String Website) {
         this.Website = Website;
     }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
 }

@@ -10,20 +10,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.eirinitelevantou.drcy.DrApp;
 import com.eirinitelevantou.drcy.R;
 import com.eirinitelevantou.drcy.model.Doctor;
-import com.eirinitelevantou.drcy.model.Specialty;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.eirinitelevantou.drcy.util.ProjectUtils.capitalize;
 
 /**
  * Created by Eirini Televantou on 12/10/2017.
@@ -34,11 +29,13 @@ import butterknife.ButterKnife;
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder> {
     private Context context;
     private List<Doctor> doctorList;
+    private OnDoctorClickedListener onDoctorClickedListener;
 
 
-    public DoctorAdapter(Context context, List<Doctor> doctorList) {
+    public DoctorAdapter(Context context,OnDoctorClickedListener onDoctorClickedListener, List<Doctor> doctorList) {
         this.context = context;
         this.doctorList = doctorList;
+        this.onDoctorClickedListener = onDoctorClickedListener;
     }
 
     @Override
@@ -51,52 +48,52 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Doctor doctor = doctorList.get(position);
+        final Doctor doctor = doctorList.get(position);
 
         holder.name.setText(capitalize( doctor.getName()));
 
         holder.sex_icon.setImageDrawable(doctor.getSex()==0? ContextCompat.getDrawable(context,R.drawable.male):ContextCompat.getDrawable(context,R.drawable.female));
 
-        Specialty specialty = null;
-        List<Integer> list = new ArrayList<Integer>();
-        String specialties =doctor.getSpeciality().replaceAll("\\s+","");
-        specialties=specialties+",";
-        for (int i = 0, j, n = specialties.length(); i < n; i = j + 1) {
-            j = specialties.indexOf(",", i);
-            list.add(Integer.parseInt(specialties.substring(i, j).trim()));
-        }
-        for(Specialty specialty1: DrApp.getInstance().getSpecialtyArrayList()){
-            if(list.contains(specialty1.getId())){
-                specialty = specialty1;
+
+
+            holder.category_name.setText(capitalize( doctor.getCommaSeparatedSpecialties()));
+
+        switch (doctor.getCity()){
+            case 0:{
+                holder.location_icon.setImageDrawable( ContextCompat.getDrawable(context,R.drawable.nicosia_hi_trimmed));
                 break;
             }
-        }
-        if(specialty!=null) {
+            case 1:{
+                holder.location_icon.setImageDrawable( ContextCompat.getDrawable(context,R.drawable.limasol_hi_trimmed));
 
-            holder.category_name.setText(capitalize( specialty.getName()));
+                break;
+            }
+            case 2:{
+                holder.location_icon.setImageDrawable( ContextCompat.getDrawable(context,R.drawable.larnaca_hi_trimmed));
+
+                break;
+            }
+            case 3:{
+                holder.location_icon.setImageDrawable( ContextCompat.getDrawable(context,R.drawable.paphos_hi_trimmed));
+
+                break;
+            }  case 4:{
+                holder.location_icon.setImageDrawable( ContextCompat.getDrawable(context,R.drawable.famagusta_hi_trimmed));
+
+                break;
+            }
+
+
         }
-    //todo location
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDoctorClickedListener.onDoctorClicked(doctor.getId());
+            }
+        });
 
     }
-    private String capitalize(String capString){
-        StringBuffer capBuffer = new StringBuffer();
-        Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
-        while (capMatcher.find()){
-            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
-        }
 
-        return capitalizeGr(capMatcher.appendTail(capBuffer).toString());
-    }
-
-    private String capitalizeGr(String capString){
-        StringBuffer capBuffer = new StringBuffer();
-        Matcher capMatcher = Pattern.compile("([α-ω])([α-ω]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
-        while (capMatcher.find()){
-            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
-        }
-
-        return capMatcher.appendTail(capBuffer).toString();
-    }
 
     @Override
     public int getItemCount() {
@@ -113,11 +110,19 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         @BindView(R.id.location_icon)
         ImageView location_icon;
 
+        @BindView(R.id.layout)
+        LinearLayout layout;
 
         ViewHolder(View view) {
             super(view);
 
             ButterKnife.bind(this, view);
         }
+
+
+
+    }
+    public interface OnDoctorClickedListener{
+        void onDoctorClicked(int doctorId);
     }
 }

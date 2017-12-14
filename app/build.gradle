@@ -37,7 +37,13 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:11.6.0'
     compile 'com.google.code.gson:gson:2.8.2'
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.thefinestartist:finestwebview:1.2.7'
+
+    implementation 'com.github.raviteja06:RxPermissions:1.2.0'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
 }
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'realm-android'
+
 

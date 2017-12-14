@@ -1,260 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    android:layout_height="match_parent">
-    <include layout="@layout/ab_main"></include>
-
-<ScrollView
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
 
-    <LinearLayout
+    android:orientation="vertical">
+
+    <include layout="@layout/ab_main"></include>
+
+    <ScrollView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/city"
-            android:layout_marginLeft="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"/>
-        <View
-            android:background="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="12dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/cyprus"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@drawable/cyprus_map"/>
-
-            <ImageView
-                android:id="@+id/larnaca"
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@drawable/larnaca_hi"/>
-
-            <ImageView
-                android:id="@+id/famagusta"
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@drawable/famagusta_hi"/>
-
-            <ImageView
-                android:id="@+id/limasol"
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@drawable/limasol_hi"/>
-
-            <ImageView
-                android:id="@+id/nicosia"
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@drawable/nicosia_hi"/>
-
-            <ImageView
-                android:id="@+id/paphos"
-
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@drawable/paphos_hi"/>
-        </RelativeLayout>
-
-        <com.google.android.flexbox.FlexboxLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:alignContent="stretch"
-            app:alignItems="stretch"
-            android:layout_marginLeft="4dp"
-            android:animateLayoutChanges="true"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="8dp"
-
-            app:flexWrap="wrap">
-
-            <TextView
-                android:id="@+id/txt_nicosia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/label_background"
-                android:text="@string/nicosia"
-
-                android:textColor="@android:color/white"
-                />
-
-            <TextView
-                android:id="@+id/txt_larnaca"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/label_background"
-
-                android:text="@string/larnaca"
-                android:textColor="@android:color/white"
-                />
-
-            <TextView
-                android:id="@+id/txt_limassol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/label_background"
-
-                android:text="@string/limassol"
-                android:textColor="@android:color/white"
-                />
-
-            <TextView
-                android:id="@+id/text_famagusta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/label_background"
-
-                android:text="@string/famagusta"
-                android:textColor="@android:color/white"
-                />
-
-            <TextView
-                android:id="@+id/text_paphos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/label_background"
-
-                android:text="@string/paphos"
-                android:textColor="@android:color/white"
-                />
-        </com.google.android.flexbox.FlexboxLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginLeft="8dp"
-
-            android:text="@string/name"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"/>
-        <View
-            android:background="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-
-        <EditText
-            android:id="@+id/name"
-            android:background="@color/colorPrimaryDarkTrans"
-            android:layout_marginTop="8dp"
-            android:paddingLeft="16dp"
-            android:hint="@string/name"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginLeft="4dp"
-            android:text="@string/rating"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"/>
-        <View
-            android:background="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-        <com.roughike.swipeselector.SwipeSelector
-            android:id="@+id/swipe_rating"
-            android:value="@+value/swipe_city"
-            android:layout_marginTop="8dp"
-
-            android:background="@color/colorPrimaryDarkTrans"
-
-            android:layout_width="match_parent"
-            app:swipe_indicatorInActiveColor="@color/colorPrimary"
-            app:swipe_indicatorActiveColor="@color/colorPrimaryDark"
-            android:layout_height="70dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginLeft="4dp"
-            android:text="@string/specialty"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"/>
-        <View
-            android:background="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-
+        android:fillViewport="true">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:id="@+id/layout_speciality"
             android:layout_width="match_parent"
-            android:padding="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/colorPrimaryDarkTrans"
-            android:gravity="center_vertical"
-            android:layout_height="70dp">
-
-
-            <ImageView
-                android:src="@drawable/ic_list"
-                android:adjustViewBounds="true"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
-                android:id="@+id/txt_speciality"
-                android:text="@string/all"
-                android:layout_marginLeft="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/city"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="12dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/cyprus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/cyprus_map"/>
+
+                <ImageView
+                    android:id="@+id/larnaca"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/larnaca_hi"/>
+
+                <ImageView
+                    android:id="@+id/famagusta"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/famagusta_hi"/>
+
+                <ImageView
+                    android:id="@+id/limasol"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/limasol_hi"/>
+
+                <ImageView
+                    android:id="@+id/nicosia"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/nicosia_hi"/>
+
+                <ImageView
+                    android:id="@+id/paphos"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/paphos_hi"/>
+            </RelativeLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:animateLayoutChanges="true"
+                app:alignContent="stretch"
+                app:alignItems="stretch"
+
+                app:flexWrap="wrap">
+
+                <TextView
+                    android:id="@+id/txt_nicosia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/label_background"
+                    android:text="@string/nicosia"
+
+                    android:textColor="@android:color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_larnaca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/label_background"
+
+                    android:text="@string/larnaca"
+                    android:textColor="@android:color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_limassol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/label_background"
+
+                    android:text="@string/limassol"
+                    android:textColor="@android:color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/text_famagusta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/label_background"
+
+                    android:text="@string/famagusta"
+                    android:textColor="@android:color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/text_paphos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/label_background"
+
+                    android:text="@string/paphos"
+                    android:textColor="@android:color/white"
+                    />
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="22dp"
+
+                android:text="@string/name"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorPrimaryDarkTrans"
+                android:hint="@string/name"
+                android:paddingLeft="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/rating"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <com.roughike.swipeselector.SwipeSelector
+                android:id="@+id/swipe_rating"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+
+                android:layout_marginTop="8dp"
+
+                android:background="@color/colorPrimaryDarkTrans"
+                android:value="@+value/swipe_city"
+                app:swipe_indicatorActiveColor="@color/colorPrimaryDark"
+                app:swipe_indicatorInActiveColor="@color/colorPrimary"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/specialty"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
+
+
+            <LinearLayout
+                android:id="@+id/layout_speciality"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorPrimaryDarkTrans"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+
+                <ImageView
+android:id="@+id/icon_specialty"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_list"/>
+
+                <TextView
+                    android:id="@+id/txt_speciality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/all"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/sector"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <com.roughike.swipeselector.SwipeSelector
+                android:id="@+id/swipe_sector"
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorPrimaryDarkTrans"
+                android:value="@+value/swipe_sector"
+                app:swipe_indicatorActiveColor="@color/colorPrimaryDark"
+                app:swipe_indicatorInActiveColor="@color/colorPrimary"/>
+            <Button
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/primary_ripple"
+                android:text="@string/search"
+                android:textColor="@android:color/white"/>
         </LinearLayout>
 
-
-        <Button
-            android:background="@drawable/label_background"
-            android:id="@+id/search"
-            android:text="@string/search"
-            android:layout_marginTop="24dp"
-            android:textColor="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
 </LinearLayout>

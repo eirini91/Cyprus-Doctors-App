@@ -55,8 +55,8 @@
         <item>RADIODYNOLOGY</item>
         <item>RADIOTHERAPEUTIC-OCCOLOGYΑ</item>
         <item>RADIOLOGY</item>
-        <item>ΑΛΛΕΡΓΙΟΛΟΓΙΑ</item>
         <item>Allergology</item>
+        <item>Anesthesia</item>
         <item>GASTRENDEROLOGY</item>
         <item>General medicine</item>
         <item>GENERAL SURGERY</item>
@@ -113,4 +113,29 @@
     <string name="university">University</string>
     <string name="telephone">Telephone</string>
     <string name="all_docs">All Doctors</string>
+    <string name="results">Results</string>
+    <string name="private_sector">Private</string>
+    <string name="public_sector">Public</string>
+    <string name="military">Military</string>
+    <string name="interchanging">15 Days Interchanging</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="address">Address</string>
+    <string name="doctor_location">Doctor Location</string>
+    <string name="nicosia_cyprus">Nicosia, Cyprus</string>
+    <string name="limassol_cuprus">Limassol, Cyprus</string>
+    <string name="larnaca_cyprus">Larnaca, Cyprus</string>
+    <string name="paphos_cyprus">Paphos, Cyprus</string>
+    <string name="famagusta_cyprus">Famagusta, Cyprus</string>
+    <string name="call_permissions_required">Making a phone call requires the call permissions</string>
+    <string name="private_expl">Doctors working privately</string>
+    <string name="public_exp">Doctors working for public hospitals</string>
+    <string name="military_expl">Doctors working for the military</string>
+    <string name="inter_expl">Doctors working for both the public and the private sector per 15 days.</string>
+    <string name="specialty_expl">Doctors still doing their specialty/training</string>
+    <string name="all_sectors">All Sectors</string>
+    <string name="all_expl">Show all doctors regardless of doctors</string>
+    <string name="no_results_found">No results found</string>
+    <string name="use_without_account">Use without account</string>
+    <string name="skip">skip</string>
 </resources>
