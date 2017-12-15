@@ -71,6 +71,32 @@
     <string name="no_results_found">No results found</string>
     <string name="use_without_account">Use without account</string>
     <string name="skip">skip</string>
+    <string name="emtpy_field_warning">Field cannot be empty</string>
+    <string name="username_short_error">Username must be at least 6 characters</string>
+    <string name="email_invalid_error">Email invalid</string>
+    <string name="password_short_error">Password must be at least 6 characters</string>
+    <string name="password_missmatch_error">Password and Confirm password must match</string>
+    <string name="verification_email_sent">Verification email sent to</string>
+    <string name="please_check_emails_to_verify">Please check your emails to verify your account. Once verified you will be able to login.</string>
+    <string name="login">Login</string>
+    <string name="resend_email">Resend Email</string>
+    <string name="auth_failed">Authentication Failed</string>
+    <string name="not_logged_in">Not logged in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_info">InfoActivity</string>
+    <string name="website">Website</string>
+    <string name="sure_logout">Are you sure you want to logout?</string>
+    <string name="cancel">Cancel</string>
     <string-array name="specialties">
         <item>ΑΓΓΕΙΟΧΕΙΡΟΥΡΓΙΚΗ</item>
         <item>ΑΙΜΑΤΟΛΟΓΙΑ</item>

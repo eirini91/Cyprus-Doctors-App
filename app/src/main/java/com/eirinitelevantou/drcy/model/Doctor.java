@@ -57,6 +57,7 @@ public class Doctor extends RealmObject {
     private String Website;
 
     private Double rating;
+    private Boolean isFavourite = false;
 
     public int getId() {
         return Id;
@@ -209,4 +210,11 @@ public class Doctor extends RealmObject {
         this.rating = rating;
     }
 
+    public Boolean getFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        isFavourite = favourite;
+    }
 }

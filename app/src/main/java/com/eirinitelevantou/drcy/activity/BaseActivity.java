@@ -54,6 +54,7 @@ public class BaseActivity extends AppCompatActivity {
         if(txtTitle!=null){
             txtTitle.setText(title);
             txtTitle.setVisibility(View.VISIBLE);
+            if(logo!=null)
             logo.setVisibility(View.GONE);
         }else{
             super.setTitle(title);
@@ -65,7 +66,8 @@ public class BaseActivity extends AppCompatActivity {
         if(txtTitle!=null){
             txtTitle.setText(getString(titleId));
             txtTitle.setVisibility(View.VISIBLE);
-            logo.setVisibility(View.GONE);
+            if(logo!=null)
+                logo.setVisibility(View.GONE);
         }else{
             super.setTitle(titleId);
         }

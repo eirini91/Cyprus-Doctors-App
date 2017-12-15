@@ -34,4 +34,5 @@ public class ProjectUtils {
 
         return capMatcher.appendTail(capBuffer).toString();
     }
+
 }

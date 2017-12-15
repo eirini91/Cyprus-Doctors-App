@@ -7,7 +7,7 @@
 
     android:orientation="vertical">
 
-    <include layout="@layout/ab_main"/>
+    <include layout="@layout/ab_details"/>
 
 
     <ScrollView

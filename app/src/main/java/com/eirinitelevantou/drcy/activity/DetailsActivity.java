@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -173,6 +175,35 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
                 txtSector.setText(R.string.specialty);
                 break;
             }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        MenuItem edit_item = menu.add(0, 11223344, 0, R.string.favourites);
+        edit_item.setIcon(doctor.getFavourite()?R.drawable.ic_heart_dark:R.drawable.ic_heart_white);
+        edit_item.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case 11223344:
+                Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        doctor.setFavourite(!doctor.getFavourite());
+                        realm.copyToRealmOrUpdate(doctor);
+
+                        item.setIcon(doctor.getFavourite()?R.drawable.ic_heart_dark:R.drawable.ic_heart_white);
+                    }
+                });
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

@@ -20,7 +20,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:background="@android:color/white"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="false">
       <include layout="@layout/nav_site_bar_layout"/>
   </android.support.design.widget.NavigationView>
 

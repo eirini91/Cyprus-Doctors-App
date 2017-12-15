@@ -27,7 +27,7 @@
                 android:layout_height="100dp"
                 android:src="@drawable/ic_user_white"
                 app:civ_border_color="@color/colorPrimaryDark"
-                app:civ_border_width="5dp"/>
+                app:civ_border_width="3dp"/>
 
             <TextView
                 android:id="@+id/txt_username"
@@ -65,57 +65,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/always_anonymous"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/language"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimaryDark"/>
-
-                <com.roughike.swipeselector.SwipeSelector
-                    android:id="@+id/swipe_language"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:value="@+value/swipe_language"
-                    app:swipe_indicatorActiveColor="@color/colorPrimaryDark"
-                    app:swipe_indicatorInActiveColor="@color/colorPrimary"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimaryDark"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/city"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimaryDark"/>
-
-                <com.roughike.swipeselector.SwipeSelector
-                    android:id="@+id/swipe_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:value="@+value/swipe_city"
-                    app:swipe_indicatorActiveColor="@color/colorPrimaryDark"
-                    app:swipe_indicatorInActiveColor="@color/colorPrimary"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimaryDark"/>
 
                 <Button
                     android:id="@+id/btn_save"

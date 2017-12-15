@@ -6,6 +6,7 @@ import com.eirinitelevantou.drcy.model.Doctor;
 import com.eirinitelevantou.drcy.model.DoctorList;
 import com.eirinitelevantou.drcy.model.Specialty;
 import com.eirinitelevantou.drcy.util.Prefs;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 /**
@@ -36,6 +38,11 @@ public class DrApp extends Application {
     public void onCreate() {
         super.onCreate();
         Realm.init(this);
+        AppEventsLogger.activateApp(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(config);
         Prefs.initPrefs(getApplicationContext());
 
         drApp =this;

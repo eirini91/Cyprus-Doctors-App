@@ -28,6 +28,8 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
     public static final String BUNDLE_KEY_CITIES = "kCities";
     public static final String BUNDLE_KEY_SPECIALTIES = "kSpecialties";
     public static final String BUNDLE_KEY_SECTOR = "kSector";
+    public static final String BUNDLE_KEY_FAVOURITES = "kFavourites";
+
     @BindView(R.id.txt_empty)
     TextView txtEmpty;
 
@@ -40,6 +42,7 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     private DoctorAdapter adapter;
+    private  boolean isFavourite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
         cities = getIntent().getIntegerArrayListExtra(BUNDLE_KEY_CITIES);
         specialties = getIntent().getIntegerArrayListExtra(BUNDLE_KEY_SPECIALTIES);
         sector = getIntent().getIntExtra(BUNDLE_KEY_SECTOR, -1);
+        isFavourite = getIntent().getBooleanExtra(BUNDLE_KEY_FAVOURITES, false);
 
         adapter = new DoctorAdapter(this, this, doctors);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -67,36 +71,43 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
 
         for (Doctor doctor : allDoctors) {
             boolean add = true;
-            if (searchTearm != null && searchTearm.length() > 0) {
-                if (!(doctor.getName().toLowerCase().contains(searchTearm.toLowerCase()))) {
+            if(!isFavourite) {
+                if (searchTearm != null && searchTearm.length() > 0) {
+                    if (!(doctor.getName().toLowerCase().contains(searchTearm.toLowerCase()))) {
+                        add = false;
+                    }
+                }
+
+                if (cities != null && (cities.size() > 0 || cities.size() == 5)) {
+                    if (!cities.contains(doctor.getCity())) {
+                        add = false;
+                    }
+                }
+
+                if (specialties != null && specialties.size() > 0) {
+                    List<Integer> common = new ArrayList<>(specialties);
+                    common.retainAll(doctor.getSpecialities());
+                    if (common.size() == 0) {
+                        add = false;
+                    }
+                }
+
+                if (sector >= 0) {
+                    if (!(doctor.getSector() == sector)) {
+                        add = false;
+
+                    }
+                }
+            }else{
+                if(!doctor.getFavourite()){
                     add = false;
+
                 }
             }
-
-            if (cities != null && (cities.size() > 0 || cities.size() == 5)) {
-                if (!cities.contains(doctor.getCity())) {
-                    add = false;
+                if (add) {
+                    doctors.add(doctor);
                 }
-            }
 
-            if (specialties != null && specialties.size() > 0) {
-                List<Integer> common = new ArrayList<>(specialties);
-                common.retainAll(doctor.getSpecialities());
-                if (common.size() == 0) {
-                    add = false;
-                }
-            }
-
-            if (sector >= 0) {
-                if (!(doctor.getSector() == sector)) {
-                    add = false;
-
-                }
-            }
-
-            if (add) {
-                doctors.add(doctor);
-            }
 
         }
         adapter.notifyDataSetChanged();

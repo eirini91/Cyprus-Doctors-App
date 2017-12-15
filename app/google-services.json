@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "638211234091-mur51mmptu4l36glpbv77j1vvmdhk8ml.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eirinitelevantou.drcy",
+            "certificate_hash": "c3c62db6a7018a1403e9a0948abed75ed37af1f4"
+          }
+        },
+        {
+          "client_id": "638211234091-1inkv1vak5red1kbtl2c85nv82goonp5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eirinitelevantou.drcy",
+            "certificate_hash": "9317fa7bf5d597ce980637134ace4456f4bb410e"
+          }
+        },
+        {
           "client_id": "638211234091-6m18gg6blvaplr94jijcf7v2bihngh2a.apps.googleusercontent.com",
           "client_type": 3
         },

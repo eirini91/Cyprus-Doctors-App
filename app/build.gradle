@@ -1,10 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'eirini'
+            keyPassword 'eej7cqt4'
+            storeFile file('C:/Users/eirini.televantou/DrDirCy/drcy/keystore/key.jks')
+            storePassword 'eej7cqt4'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.eirinitelevantou.drcy"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -14,13 +22,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -32,15 +40,16 @@ dependencies {
     implementation 'com.google.android:flexbox:0.3.1'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.google.android.gms:play-services-maps:11.6.0'
+    implementation 'com.google.android.gms:play-services-maps:11.6.2'
     implementation 'com.facebook.android:facebook-login:[4,5)'
-    implementation 'com.google.android.gms:play-services-auth:11.6.0'
+    implementation 'com.google.android.gms:play-services-auth:11.6.2'
     compile 'com.google.code.gson:gson:2.8.2'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.thefinestartist:finestwebview:1.2.7'
-
     implementation 'com.github.raviteja06:RxPermissions:1.2.0'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.google.firebase:firebase-auth:11.6.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
 }
 apply plugin: 'com.google.gms.google-services'

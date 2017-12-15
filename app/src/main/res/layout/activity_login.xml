@@ -46,6 +46,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
+                    android:drawablePadding="8dp"
+
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -62,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/key"
-
+                    android:drawablePadding="8dp"
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_sign_in_short"
@@ -139,6 +141,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:gravity="center">
+
 
                 <Button
                     android:id="@+id/fb"
