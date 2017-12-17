@@ -42,10 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText confirmPassword;
     @BindView(R.id.email_sign_up_button)
     Button emailSignUpButton;
-    @BindView(R.id.fb)
-    Button fb;
-    @BindView(R.id.google)
-    Button google;
+
 
     ProgressDialog progressDialog;
     @Override

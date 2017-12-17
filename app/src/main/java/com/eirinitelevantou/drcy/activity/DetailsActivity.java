@@ -31,6 +31,7 @@ import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,7 +68,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
     TextView txtWeb;
     @BindView(R.id.txt_address)
     TextView txtAddress;
-
+    LatLng latLng;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,7 +183,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
     public boolean onCreateOptionsMenu(Menu menu){
 
         MenuItem edit_item = menu.add(0, 11223344, 0, R.string.favourites);
-        edit_item.setIcon(doctor.getFavourite()?R.drawable.ic_heart_dark:R.drawable.ic_heart_white);
+        edit_item.setIcon(doctor.getFavourite()?R.drawable.ic_heart:R.drawable.ic_heart);
         edit_item.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return super.onCreateOptionsMenu(menu);
     }
@@ -197,7 +198,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
                         doctor.setFavourite(!doctor.getFavourite());
                         realm.copyToRealmOrUpdate(doctor);
 
-                        item.setIcon(doctor.getFavourite()?R.drawable.ic_heart_dark:R.drawable.ic_heart_white);
+                        item.setIcon(doctor.getFavourite()?R.drawable.ic_heart:R.drawable.ic_heart);
                     }
                 });
                 return true;
@@ -222,7 +223,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
 
         Geocoder coder = new Geocoder(this);
         List<Address> address;
-        LatLng p1 = null;
+        latLng = null;
 
         try {
             // May throw an IOException
@@ -234,20 +235,24 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
             location.getLatitude();
             location.getLongitude();
 
-            p1 = new LatLng(location.getLatitude(), location.getLongitude());
+            latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         } catch (IOException ex) {
 
             ex.printStackTrace();
         }
 
-        return p1;
+        return latLng;
     }
 
     @OnClick({R.id.locate_me, R.id.call, R.id.web})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.locate_me:
+
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?daddr="+latLng.latitude+","+latLng.longitude));
+                startActivity(intent);
                 break;
             case R.id.call:
 

@@ -7,7 +7,7 @@
 
     android:orientation="vertical">
 
-    <include layout="@layout/ab_details"/>
+    <include layout="@layout/ab_main" />
 
 
     <ScrollView
@@ -44,7 +44,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_toLeftOf="@+id/locate_me"
                         android:orientation="vertical"
-                        android:padding="4dp">
+                        android:padding="2dp">
 
                         <TextView
                             android:id="@+id/name"
@@ -90,8 +90,8 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
                     android:layout_weight="1"
-                    android:clickable="true"
                     android:background="@drawable/primary_ripple"
+                    android:clickable="true"
                     android:gravity="center">
 
                     <ImageView
@@ -121,8 +121,8 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
                     android:layout_weight="1"
-                    android:clickable="true"
                     android:background="@drawable/primary_ripple"
+                    android:clickable="true"
                     android:gravity="center">
 
                     <ImageView
@@ -270,6 +270,304 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/language" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ratings_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reviews"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/rating"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="4.3"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <RatingBar
+                        android:id="@+id/rating_bar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="4.3"
+                        android:stepSize="0.1" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="2dp"
+                            android:src="@drawable/user" />
+
+                        <TextView
+                            android:id="@+id/people_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="305" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/five_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_star_accent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ProgressBar
+                                android:id="@+id/five_progress"
+                                style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="17dp"
+                                android:layout_centerVertical="true"
+
+                                android:layout_marginLeft="8dp"
+                                android:progress="80"
+                                android:progressDrawable="@drawable/pb_dark_green"
+                                />
+
+                            <TextView
+                                android:id="@+id/five_people_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="8dp"
+                                android:text="200" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/four_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_star_accent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ProgressBar
+                                android:id="@+id/four_progress"
+                                style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="17dp"                                android:layout_centerVertical="true"
+
+                                android:layout_marginLeft="8dp"
+                                android:progress="70"
+                                android:progressDrawable="@drawable/pb_light_green"
+                                />
+
+                            <TextView
+                                android:id="@+id/four_people_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="8dp"
+                                android:text="200" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/three_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_star_accent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3" />
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ProgressBar
+                                android:id="@+id/three_progress"
+                                style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="17dp"
+                                android:layout_marginLeft="8dp"                                android:layout_centerVertical="true"
+
+                                android:progress="60"
+                                android:progressDrawable="@drawable/pb_light_orange" />
+
+                            <TextView
+                                android:id="@+id/three_people_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="8dp"
+                                android:text="200" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/two_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_star_accent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ProgressBar
+                                android:id="@+id/two_progress"
+                                style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="17dp"
+                                android:layout_marginLeft="8dp"                                android:layout_centerVertical="true"
+
+                                android:progress="50"
+                                android:progressDrawable="@drawable/pb_dark_orange" />
+
+                            <TextView
+                                android:id="@+id/two_people_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="8dp"
+                                android:text="200" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/one_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_star_accent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ProgressBar
+                                android:id="@+id/one_progress"
+                                style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="17dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_centerVertical="true"
+
+                                android:progress="20"
+                                android:progressDrawable="@drawable/pb_light_red" />
+
+                            <TextView
+                                android:id="@+id/one_people_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="8dp"
+                                android:text="200" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
