@@ -7,10 +7,10 @@
 
     android:orientation="vertical">
 
-    <include layout="@layout/ab_main" />
+    <include layout="@layout/ab_details"/>
 
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -566,10 +566,26 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+            <Button
+                android:layout_margin="8dp"
+                android:id="@+id/write_a_review"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/primary_ripple"
+                android:text="@string/write_a_review"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/reviews_list"
+                android:layout_margin="8dp"
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView >
 </LinearLayout>

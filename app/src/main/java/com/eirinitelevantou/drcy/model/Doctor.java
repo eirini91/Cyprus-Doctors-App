@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -56,7 +57,8 @@ public class Doctor extends RealmObject {
     @SerializedName("Website")
     private String Website;
 
-    private Double rating;
+    private RealmList<Review> reviews;
+    private Double rating = 0.0;
     private Boolean isFavourite = false;
 
     public int getId() {
@@ -216,5 +218,13 @@ public class Doctor extends RealmObject {
 
     public void setFavourite(Boolean favourite) {
         isFavourite = favourite;
+    }
+
+    public RealmList<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(RealmList<Review> reviews) {
+        this.reviews = reviews;
     }
 }

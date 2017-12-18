@@ -2,6 +2,7 @@ package com.eirinitelevantou.drcy;
 
 import android.app.Application;
 
+import com.contentful.java.cda.CDAClient;
 import com.eirinitelevantou.drcy.model.Doctor;
 import com.eirinitelevantou.drcy.model.DoctorList;
 import com.eirinitelevantou.drcy.model.Specialty;
@@ -30,6 +31,7 @@ public class DrApp extends Application {
 
     private static  DrApp drApp;
 
+    private CDAClient client;
     public static  DrApp getInstance() {
         return drApp;
     }
@@ -49,7 +51,21 @@ public class DrApp extends Application {
         setDoctors();
         setSpecialties();
 
+        client = CDAClient.builder()
+                .setSpace("0igz66otnsb3")
+                .setToken("49ac1564b9cf146bedea212f09e59499940419d65d383d28087da33449ffef7c")
+                .build();
+
     }
+
+    public CDAClient getClient() {
+        return client;
+    }
+
+    public void setClient(CDAClient client) {
+        this.client = client;
+    }
+
     private void setSpecialties() {
 
         String[] specialties = getResources().getStringArray(R.array.specialties);

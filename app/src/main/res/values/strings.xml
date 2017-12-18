@@ -153,4 +153,18 @@
     <string name="sure_logout">Are you sure you want to logout?</string>
     <string name="cancel">Cancel</string>
     <string name="reviews">Reviews</string>
+    <string name="write_a_review">Write a Review</string>
+    <string name="review">Review</string>
+    <string name="post">Post</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="login_to_leave_a_review">Login to leave a review</string>
+    <string name="review_added">Review Added</string>
+    <string name="already_rated">Already Rated</string>
+    <string name="_1_star_min">1 Star min</string>
+    <string name="_2_star_min">2 Stars min</string>
+    <string name="_3_star_min">3 Stars min</string>
+    <string name="_4_star_min">4 Stars min</string>
+    <string name="_5_star_min">5 Stars min</string>
+    <string name="search_by_rating">Search doctors by Rating</string>
+
 </resources>

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.thefinestartist:finestwebview-1.2.7">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/finestwebview-1.2.7.aar/6d446c08d4699b0a4f29602861f76497/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/finestwebview-1.2.7.aar/6d446c08d4699b0a4f29602861f76497/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/finestwebview-1.2.7.aar/c99fcba4fc25abfa5e1737a28345fc64/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/finestwebview-1.2.7.aar/c99fcba4fc25abfa5e1737a28345fc64/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

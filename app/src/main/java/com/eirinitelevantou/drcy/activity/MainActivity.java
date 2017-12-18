@@ -1,13 +1,13 @@
 package com.eirinitelevantou.drcy.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,11 +17,17 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.contentful.vault.SyncConfig;
+import com.contentful.vault.Vault;
+import com.eirinitelevantou.drcy.DrApp;
 import com.eirinitelevantou.drcy.R;
+import com.eirinitelevantou.drcy.model.CFSpace;
+import com.eirinitelevantou.drcy.model.Doctor;
+import com.eirinitelevantou.drcy.model.Review;
+import com.eirinitelevantou.drcy.model.ReviewCF;
 import com.eirinitelevantou.drcy.util.PrefsHelper;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,12 +35,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 import static com.eirinitelevantou.drcy.activity.SearchResultsActivity.BUNDLE_KEY_FAVOURITES;
+import static com.eirinitelevantou.drcy.activity.SearchResultsActivity.BUNDLE_KEY_TOP;
 
 public class MainActivity extends BaseActivity {
 
@@ -93,6 +105,7 @@ public class MainActivity extends BaseActivity {
     LinearLayout userLayout;
     @BindView(R.id.txt_logout)
     TextView txtLogout;
+
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -107,8 +120,64 @@ public class MainActivity extends BaseActivity {
         toggle.syncState();
         firebaseAuth = FirebaseAuth.getInstance();
 
-
         setupView();
+        fetchReviews();
+    }
+
+    private static final String TAG = "MainActivity";
+
+    private void fetchReviews() {
+        Vault vault = Vault.with(this, CFSpace.class);
+        vault.requestSync(SyncConfig.builder().setClient(DrApp.getInstance().getClient()).build());
+        List<ReviewCF> reviewCFList = vault.fetch(ReviewCF.class).all();
+
+        Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<Review> results = realm.where(Review.class).findAll();
+                results.deleteAllFromRealm();
+
+            }
+        });
+
+        for (ReviewCF reviewCF : reviewCFList) {
+            final Review review = new Review(reviewCF);
+            Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.copyToRealmOrUpdate(review);
+                }
+            });
+        }
+
+        updateDoctors(DrApp.getInstance().getDoctors());
+
+    }
+
+    public void updateDoctors(ArrayList<Doctor> allDoctors) {
+        for (final Doctor doctor : allDoctors) {
+            double ratingSum = 0.0;
+            int ratingCount;
+            RealmResults<Review> reviewRealmList = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("hide", false).findAll();
+
+            if (reviewRealmList != null) {
+                ratingCount = reviewRealmList.size();
+
+                for (Review review : reviewRealmList) {
+                    ratingSum += review.getRating();
+                }
+
+                final double fRatingSum = ratingSum / ratingCount;
+                if (!doctor.getRating().equals(fRatingSum)) {
+                    Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            doctor.setRating(fRatingSum);
+                        }
+                    });
+                }
+            }
+        }
     }
 
     private void setupView() {
@@ -132,17 +201,14 @@ public class MainActivity extends BaseActivity {
                     break;
                 }
                 case PrefsHelper.AUTH_TYPE_GOOGLE: {
-                    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-
-                    Uri personPhoto = acct.getPhotoUrl();
+                    userName.setText(firebaseAuth.getCurrentUser().getDisplayName());
+                    email.setText(firebaseAuth.getCurrentUser().getEmail());
                     Picasso.with(this)
-                            .load(personPhoto)
+                            .load(firebaseAuth.getCurrentUser().getPhotoUrl())
                             .resize(150, 150)
                             .centerCrop()
                             .placeholder(R.drawable.ic_user_white)
                             .into(imageView);
-                    userName.setText(acct.getDisplayName());
-                    email.setText(acct.getEmail());
                     break;
                 }
                 case PrefsHelper.AUTH_TYPE_FACEBOOK: {
@@ -163,7 +229,6 @@ public class MainActivity extends BaseActivity {
             userLayout.setVisibility(View.GONE);
             myReviews.setAlpha(0.5f);
             settings.setAlpha(0.5f);
-
         }
     }
 
@@ -177,11 +242,15 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.side_search, R.id.all, R.id.top_doctors, R.id.favourites, R.id.my_reviews, R.id.settings, R.id.logout, R.id.info, R.id.search_category, R.id.search_area, R.id.search_rating, R.id.search})
+    @OnClick({R.id.side_search, R.id.all, R.id.top_doctors, R.id.search_top, R.id.favourites, R.id.my_reviews, R.id.settings, R.id.logout, R.id.info, R.id.search_category, R.id.search_area, R.id.search_rating, R.id.search})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
             case R.id.top_doctors:
+            case R.id.search_top:
+                intent = new Intent(this, SearchResultsActivity.class);
+                intent.putExtra(BUNDLE_KEY_TOP, true);
+                startActivity(intent);
                 break;
             case R.id.favourites:
                 intent = new Intent(this, SearchResultsActivity.class);
@@ -206,19 +275,18 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.logout:
                 if (PrefsHelper.isLoggedIn()) {
-                MaterialDialog dialog = new MaterialDialog.Builder(MainActivity.this)
-                        .title(R.string.logout)
-                        .content(R.string.sure_logout)
-                        .positiveText(R.string.logout)
-                        .negativeText(R.string.cancel)
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                logout();
-                            }
-                        })
-                        .show();
-
+                    MaterialDialog dialog = new MaterialDialog.Builder(MainActivity.this)
+                            .title(R.string.logout)
+                            .content(R.string.sure_logout)
+                            .positiveText(R.string.logout)
+                            .negativeText(R.string.cancel)
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    logout();
+                                }
+                            })
+                            .show();
 
                 } else {
                     intent = new Intent(this, LoginActivity.class);
@@ -237,6 +305,73 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.search_rating:
+                LayoutInflater layoutInflater = LayoutInflater.from(this);
+
+                View v = layoutInflater.inflate(R.layout.layout_review_search, null);
+                LinearLayout oneStar = v.findViewById(R.id.one_star);
+                LinearLayout twoStar = v.findViewById(R.id.two_star);
+                LinearLayout threeStar = v.findViewById(R.id.three_star);
+                LinearLayout fourStar = v.findViewById(R.id.four_star);
+                LinearLayout fiveStar = v.findViewById(R.id.five_star);
+
+
+
+             final   MaterialDialog dialog = new MaterialDialog.Builder(this)
+                        .title(R.string.search_by_rating)
+                        .neutralText(R.string.cancel)
+
+                        .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+
+                        .customView(v, true)
+                        .show();
+                View.OnClickListener onClickListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
+
+                        switch (v.getId()){
+                            case R.id.one_star:{
+                                intent.putExtra(SearchResultsActivity.BUNDLE_KEY_MIN_RATING,1);
+
+                                break;
+                            }
+                            case R.id.two_star:{
+                                intent.putExtra(SearchResultsActivity.BUNDLE_KEY_MIN_RATING,2);
+
+                                break;
+                            }
+                            case R.id.three_star:{
+                                intent.putExtra(SearchResultsActivity.BUNDLE_KEY_MIN_RATING,3);
+
+                                break;
+                            }
+                            case R.id.four_star:{
+                                intent.putExtra(SearchResultsActivity.BUNDLE_KEY_MIN_RATING,4);
+
+                                break;
+                            }
+                            case R.id.five_star:{
+                                intent.putExtra(SearchResultsActivity.BUNDLE_KEY_MIN_RATING,5);
+
+                                break;
+                            }
+
+                        }
+                        dialog.dismiss();
+                        startActivity(intent);
+
+                    }
+                };
+                oneStar.setOnClickListener(onClickListener);
+                twoStar.setOnClickListener(onClickListener);
+                threeStar.setOnClickListener(onClickListener);
+                fourStar.setOnClickListener(onClickListener);
+                fiveStar.setOnClickListener(onClickListener);
                 break;
             case R.id.side_search:
             case R.id.search:
@@ -276,6 +411,10 @@ public class MainActivity extends BaseActivity {
                             });
                     PrefsHelper.setLoggedIn(false, -1);
                     PrefsHelper.setUserAlwaysAnonymous(false);
+
+                    firebaseAuth.signOut();
+                    setupView();
+
                     break;
                 }
                 case PrefsHelper.AUTH_TYPE_FACEBOOK: {

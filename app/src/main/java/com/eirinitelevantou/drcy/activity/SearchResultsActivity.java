@@ -12,6 +12,7 @@ import com.eirinitelevantou.drcy.DrApp;
 import com.eirinitelevantou.drcy.R;
 import com.eirinitelevantou.drcy.adapter.DoctorAdapter;
 import com.eirinitelevantou.drcy.model.Doctor;
+import com.eirinitelevantou.drcy.util.ProjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +30,13 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
     public static final String BUNDLE_KEY_SPECIALTIES = "kSpecialties";
     public static final String BUNDLE_KEY_SECTOR = "kSector";
     public static final String BUNDLE_KEY_FAVOURITES = "kFavourites";
+    public static final String BUNDLE_KEY_TOP = "kTop";
 
     @BindView(R.id.txt_empty)
     TextView txtEmpty;
 
     private String searchTearm;
-    private double minRating;
+    private int minRating;
     private ArrayList<Integer> cities;
     private ArrayList<Integer> specialties;
     ArrayList<Doctor> doctors = new ArrayList<>();
@@ -42,7 +44,8 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     private DoctorAdapter adapter;
-    private  boolean isFavourite;
+    private boolean isFavourite;
+    private boolean isTop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +55,12 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
         setTitle(getString(R.string.results));
 
         searchTearm = getIntent().getStringExtra(BUNDLE_KEY_SEARCH_TERM);
-        minRating = getIntent().getDoubleExtra(BUNDLE_KEY_MIN_RATING, 0);
+        minRating = getIntent().getIntExtra(BUNDLE_KEY_MIN_RATING, 0);
         cities = getIntent().getIntegerArrayListExtra(BUNDLE_KEY_CITIES);
         specialties = getIntent().getIntegerArrayListExtra(BUNDLE_KEY_SPECIALTIES);
         sector = getIntent().getIntExtra(BUNDLE_KEY_SECTOR, -1);
         isFavourite = getIntent().getBooleanExtra(BUNDLE_KEY_FAVOURITES, false);
+        isTop = getIntent().getBooleanExtra(BUNDLE_KEY_TOP, false);
 
         adapter = new DoctorAdapter(this, this, doctors);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -68,57 +72,69 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
 
     private void populateData() {
         ArrayList<Doctor> allDoctors = DrApp.getInstance().getDoctors();
+        if (!isTop) {
+            for (Doctor doctor : allDoctors) {
+                boolean add = true;
+                if (!isFavourite) {
 
-        for (Doctor doctor : allDoctors) {
-            boolean add = true;
-            if(!isFavourite) {
-                if (searchTearm != null && searchTearm.length() > 0) {
-                    if (!(doctor.getName().toLowerCase().contains(searchTearm.toLowerCase()))) {
+                    if (searchTearm != null && searchTearm.length() > 0) {
+                        if (!(doctor.getName().toLowerCase().contains(searchTearm.toLowerCase()))) {
+                            add = false;
+                        }
+                    }
+
+                    if (cities != null && (cities.size() > 0 || cities.size() == 5)) {
+                        if (!cities.contains(doctor.getCity())) {
+                            add = false;
+                        }
+                    }
+
+                    if (specialties != null && specialties.size() > 0) {
+                        List<Integer> common = new ArrayList<>(specialties);
+                        common.retainAll(doctor.getSpecialities());
+                        if (common.size() == 0) {
+                            add = false;
+                        }
+                    }
+
+                    if (sector >= 0) {
+                        if (!(doctor.getSector() == sector)) {
+                            add = false;
+
+                        }
+                    }
+
+                    if (minRating > 0) {
+                        if ((doctor.getRating() < minRating || doctor.getRating().isNaN())) {
+                            add = false;
+
+                        }
+                    }
+
+                } else {
+                    if (!doctor.getFavourite()) {
                         add = false;
+
                     }
                 }
-
-                if (cities != null && (cities.size() > 0 || cities.size() == 5)) {
-                    if (!cities.contains(doctor.getCity())) {
-                        add = false;
-                    }
-                }
-
-                if (specialties != null && specialties.size() > 0) {
-                    List<Integer> common = new ArrayList<>(specialties);
-                    common.retainAll(doctor.getSpecialities());
-                    if (common.size() == 0) {
-                        add = false;
-                    }
-                }
-
-                if (sector >= 0) {
-                    if (!(doctor.getSector() == sector)) {
-                        add = false;
-
-                    }
-                }
-            }else{
-                if(!doctor.getFavourite()){
-                    add = false;
-
-                }
-            }
                 if (add) {
                     doctors.add(doctor);
                 }
 
-
+            }
+        } else {
+            doctors.addAll(ProjectUtils.getTop20(allDoctors, this));
         }
-        adapter.notifyDataSetChanged();
 
-        if(doctors.size()==0){
+        if (doctors.size() == 0) {
             txtEmpty.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
-        }else{
+        } else {
             txtEmpty.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
+        adapter.notifyDataSetChanged();
+
     }
 
     @Override

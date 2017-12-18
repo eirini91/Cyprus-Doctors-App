@@ -31,9 +31,6 @@ public class SpecialtyActivity extends BaseActivity implements SpecialtyAdapter.
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
-
-
     }
 
     @Override

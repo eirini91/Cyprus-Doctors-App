@@ -2,25 +2,46 @@ package com.eirinitelevantou.drcy.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RatingBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.apt7.rxpermissions.Permission;
 import com.apt7.rxpermissions.PermissionObservable;
+import com.contentful.java.cma.CMACallback;
+import com.contentful.java.cma.CMAClient;
+import com.contentful.java.cma.model.CMAEntry;
 import com.eirinitelevantou.drcy.R;
+import com.eirinitelevantou.drcy.adapter.ReviewAdapter;
 import com.eirinitelevantou.drcy.model.Doctor;
+import com.eirinitelevantou.drcy.model.Review;
+import com.eirinitelevantou.drcy.model.User;
+import com.eirinitelevantou.drcy.util.PrefsHelper;
+import com.eirinitelevantou.drcy.util.ProjectUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,18 +51,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.observers.DisposableObserver;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 import static com.eirinitelevantou.drcy.util.ProjectUtils.capitalize;
 
-public class DetailsActivity extends BaseActivity implements OnMapReadyCallback {
+public class DetailsActivity extends BaseActivity implements OnMapReadyCallback, ReviewAdapter.OnReviewClickedListener {
 
     public static String KEY_DOCTOR_ID = "kDoctorId";
 
@@ -69,6 +91,54 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
     @BindView(R.id.txt_address)
     TextView txtAddress;
     LatLng latLng;
+    @BindView(R.id.rating)
+    TextView rating;
+    @BindView(R.id.rating_bar)
+    RatingBar ratingBar;
+    @BindView(R.id.people_count)
+    TextView peopleCount;
+    @BindView(R.id.five_progress)
+    ProgressBar fiveProgress;
+    @BindView(R.id.five_people_count)
+    TextView fivePeopleCount;
+    @BindView(R.id.five_layout)
+    LinearLayout fiveLayout;
+    @BindView(R.id.four_progress)
+    ProgressBar fourProgress;
+    @BindView(R.id.four_people_count)
+    TextView fourPeopleCount;
+    @BindView(R.id.four_layout)
+    LinearLayout fourLayout;
+    @BindView(R.id.three_progress)
+    ProgressBar threeProgress;
+    @BindView(R.id.three_people_count)
+    TextView threePeopleCount;
+    @BindView(R.id.three_layout)
+    LinearLayout threeLayout;
+    @BindView(R.id.two_progress)
+    ProgressBar twoProgress;
+    @BindView(R.id.two_people_count)
+    TextView twoPeopleCount;
+    @BindView(R.id.two_layout)
+    LinearLayout twoLayout;
+    @BindView(R.id.one_progress)
+    ProgressBar oneProgress;
+    @BindView(R.id.one_people_count)
+    TextView onePeopleCount;
+    @BindView(R.id.one_layout)
+    LinearLayout oneLayout;
+    @BindView(R.id.ratings_layout)
+    LinearLayout ratingsLayout;
+    @BindView(R.id.write_a_review)
+    Button writeAReview;
+    @BindView(R.id.reviews_list)
+    RecyclerView reviewsList;
+
+    private ReviewAdapter adapter;
+    ArrayList<Review> reviews;
+
+    boolean alreadyRated = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +157,29 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
 
         populateViews();
+
+        reviews = new ArrayList<>();
+        RealmResults<Review> reviewRealmList = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("hide", false).findAll();
+        reviews.addAll(reviewRealmList);
+        adapter = new ReviewAdapter(this, this, reviews);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        reviewsList.setLayoutManager(mLayoutManager);
+        reviewsList.setItemAnimator(new DefaultItemAnimator());
+        reviewsList.setAdapter(adapter);
+
+        updateUi();
+    }
+
+    private void updateUi() {
+        Review results = Realm.getDefaultInstance().where(Review.class).equalTo("Id", ProjectUtils.getCurrentUser(this).getUserId() + "-" + doctor.getId()).findFirst();
+
+        if (results == null) {
+            writeAReview.setAlpha(1.0f);
+
+        } else {
+            writeAReview.setAlpha(0.5f);
+            alreadyRated = true;
+        }
     }
 
     private void populateViews() {
@@ -180,10 +273,10 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuItem edit_item = menu.add(0, 11223344, 0, R.string.favourites);
-        edit_item.setIcon(doctor.getFavourite()?R.drawable.ic_heart:R.drawable.ic_heart);
+        edit_item.setIcon(doctor.getFavourite() ? R.drawable.ic_heart_dark : R.drawable.ic_heart_white);
         edit_item.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return super.onCreateOptionsMenu(menu);
     }
@@ -198,7 +291,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
                         doctor.setFavourite(!doctor.getFavourite());
                         realm.copyToRealmOrUpdate(doctor);
 
-                        item.setIcon(doctor.getFavourite()?R.drawable.ic_heart:R.drawable.ic_heart);
+                        item.setIcon(doctor.getFavourite() ? R.drawable.ic_heart_dark : R.drawable.ic_heart_white);
                     }
                 });
                 return true;
@@ -228,7 +321,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
         try {
             // May throw an IOException
             address = coder.getFromLocationName(strAddress, 5);
-            if (address == null || address.size()==0) {
+            if (address == null || address.size() == 0) {
                 address = coder.getFromLocationName("Cyprus", 5);
             }
             Address location = address.get(0);
@@ -250,8 +343,8 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
         switch (view.getId()) {
             case R.id.locate_me:
 
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?daddr="+latLng.latitude+","+latLng.longitude));
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?daddr=" + latLng.latitude + "," + latLng.longitude));
                 startActivity(intent);
                 break;
             case R.id.call:
@@ -262,15 +355,15 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
                             @Override
                             public void onNext(Permission permission) {
                                 System.out.println("Permission Check : " + permission.getName() + " -- " + permission.getGranted());
-                                if(permission.getGranted()==1) {
+                                if (permission.getGranted() == 1) {
                                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + doctor.getTel()));
                                     startActivity(intent);
-                                }else if(permission.getGranted()==0) {
+                                } else if (permission.getGranted() == 0) {
                                     askForPermissions();
                                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + doctor.getTel()));
                                     startActivity(intent);
-                                }else{
-                                   Toast.makeText(DetailsActivity.this, R.string.call_permissions_required,Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(DetailsActivity.this, R.string.call_permissions_required, Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -287,34 +380,30 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
                             }
                         });
 
-
-
-
                 break;
             case R.id.web:
                 new FinestWebView.Builder(this).showIconBack(true).showIconMenu(true).
-                        titleColor(ContextCompat.getColor(this,R.color.colorPrimaryDark)).
+                        titleColor(ContextCompat.getColor(this, R.color.colorPrimaryDark)).
                         urlColorRes(android.R.color.white).iconDefaultColorRes(android.R.color.white).
-                        toolbarColor(ContextCompat.getColor(this,(R.color.colorPrimary))).
-                        statusBarColor(ContextCompat.getColor(this,(R.color.colorPrimaryDark))).
+                        toolbarColor(ContextCompat.getColor(this, (R.color.colorPrimary))).
+                        statusBarColor(ContextCompat.getColor(this, (R.color.colorPrimaryDark))).
                         show(doctor.getWebsite());
                 break;
         }
     }
 
-    public void askForPermissions(){
+    public void askForPermissions() {
         PermissionObservable.getInstance().request(this, Manifest.permission.CALL_PHONE)
                 .subscribe(new DisposableObserver<Permission>() {
 
                     @SuppressLint("MissingPermission")
                     @Override
                     public void onNext(Permission permission) {
-                        if(permission.getGranted()==1) {
+                        if (permission.getGranted() == 1) {
                             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + doctor.getTel()));
                             startActivity(intent);
-                        }else
-                        {
-                            Toast.makeText(DetailsActivity.this, R.string.call_permissions_required,Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(DetailsActivity.this, R.string.call_permissions_required, Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -331,4 +420,145 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback 
                     }
                 });
     }
+
+    @OnClick(R.id.write_a_review)
+    public void onViewClicked() {
+
+        if (PrefsHelper.isLoggedIn() && !alreadyRated) {
+            MaterialDialog dialog = new MaterialDialog.Builder(this)
+                    .title(R.string.write_a_review)
+                    .customView(R.layout.layout_review_dialog, true)
+                    .neutralText(R.string.cancel)
+                    .positiveText(R.string.post)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            View view = dialog.getCustomView();
+                            final RatingBar ratingBar = view.findViewById(R.id.rating_bar);
+                            final EditText reviewEditText = view.findViewById(R.id.review);
+                            final Switch switchAnonymous = view.findViewById(R.id.switch_anonymous);
+                            final CMAClient client =
+                                    new CMAClient
+                                            .Builder()
+                                            .setAccessToken("CFPAT-7ecfa998a067662e9bb0b147f3387afd77e66fc02d09e24dff1b5b60f2fb5d46")
+                                            .build();
+
+                            final User currentUser = ProjectUtils.getCurrentUser(DetailsActivity.this);
+                            final CMAEntry entry =
+                                    new CMAEntry()
+                                            .setField("id", "en-US", currentUser.getUserId() + "-" + doctor.getId())
+                                            .setField("userName", "en-US", currentUser.getUserName())
+                                            .setField("review", "en-US", reviewEditText.getText().toString())
+                                            .setField("userId", "en-US", currentUser.getUserId())
+                                            .setField("isAnonymised", "en-US", switchAnonymous.isChecked())
+                                            .setField("rating", "en-US", ratingBar.getRating())
+                                            .setField("doctorId", "en-US", doctor.getId())
+                                            .setField("userImageUrl", "en-US", currentUser.getImageUrl());
+                            client.entries()
+                                    .async()
+                                    .create(
+                                            "0igz66otnsb3",
+                                            "review",
+                                            entry,
+                                            new CMACallback<CMAEntry>() {
+                                                @Override
+                                                protected void onSuccess(CMAEntry entry) {
+
+                                                    client
+                                                            .entries()
+                                                            .async()
+                                                            .publish(
+                                                                    entry,
+                                                                    new CMACallback<CMAEntry>() {
+                                                                        @Override
+                                                                        protected void onSuccess(CMAEntry result) {
+                                                                            // Successfully published.
+                                                                            Toast.makeText(DetailsActivity.this, getString(R.string.review_added), Toast.LENGTH_SHORT).show();
+
+                                                                            Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+                                                                                @Override
+                                                                                public void execute(Realm realm) {
+                                                                                    Review review = new Review(currentUser.getUserId() + "-" + doctor.getId(), reviewEditText.getText().toString(), currentUser.getUserId(), switchAnonymous.isChecked(), Double.valueOf(String.valueOf(ratingBar.getRating())), doctor.getId(), currentUser.getUserName());
+                                                                                    realm.copyToRealmOrUpdate(review);
+                                                                                    reviews.add(review);
+                                                                                    adapter.notifyDataSetChanged();
+                                                                                    updateUi();
+                                                                                }
+                                                                            });
+                                                                        }
+
+                                                                        @Override
+                                                                        protected void onFailure(RuntimeException exception) {
+                                                                            // An error occurred! Inform the user.
+                                                                            new AlertDialog.Builder(DetailsActivity.this)
+                                                                                    .setTitle("Contentful Error")
+                                                                                    .setMessage("Could not publish an entry." +
+                                                                                            "\n\nReason: " + exception.toString())
+                                                                                    .show();
+
+                                                                            super.onFailure(exception);
+                                                                        }
+                                                                    }
+                                                            );
+                                                }
+
+                                                @Override
+                                                protected void onFailure(RuntimeException exception) {
+                                                    // An error occurred! Inform the user.
+                                                    new AlertDialog.Builder(DetailsActivity.this)
+                                                            .setTitle("Contentful Error")
+                                                            .setMessage("Could not create an entry." +
+                                                                    "\n\nReason: " + exception.toString())
+                                                            .show();
+
+                                                    super.onFailure(exception);
+                                                }
+                                            }
+                                    );
+                        }
+                    })
+                    .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+
+        } else {
+            if (alreadyRated) {
+                Toast.makeText(this, R.string.already_rated, Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(this, R.string.login_to_leave_a_review, Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    }
+
+    @Override
+    public void onReviewClicked(Review review) {
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+
+        View v = layoutInflater.inflate(R.layout.layout_full_review_dialog, null);
+        TextView username = v.findViewById(R.id.username);
+        RatingBar ratingBar = v.findViewById(R.id.rating_bar);
+        TextView reviewLarge = v.findViewById(R.id.review);
+        username.setText(review.getUserName());
+        ratingBar.setRating(Float.valueOf(String.valueOf(review.getRating())));
+        reviewLarge.setText(review.getReview());
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.review)
+                .customView(v, true)
+                .positiveText(android.R.string.ok)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+
 }

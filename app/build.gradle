@@ -17,6 +17,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
     }
     buildTypes {
         release {
@@ -29,7 +31,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:27.0.1'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -43,13 +45,22 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:11.6.2'
     implementation 'com.facebook.android:facebook-login:[4,5)'
     implementation 'com.google.android.gms:play-services-auth:11.6.2'
-    compile 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.thefinestartist:finestwebview:1.2.7'
     implementation 'com.github.raviteja06:RxPermissions:1.2.0'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.google.firebase:firebase-auth:11.6.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.contentful.java:java-sdk:8.0.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+// Because RxAndroid releases are few and far between, it is recommended you also
+// explicitly depend on RxJava's latest version for bug fixes and new features.
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    annotationProcessor 'com.contentful.vault:compiler:3.0.1'
+    annotationProcessor 'com.contentful.vault:core:3.0.1'
+    implementation 'com.contentful.vault:core:3.0.1'
+    implementation 'com.contentful.java:cma-sdk:2.2.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

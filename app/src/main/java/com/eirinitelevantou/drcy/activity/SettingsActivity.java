@@ -1,6 +1,5 @@
 package com.eirinitelevantou.drcy.activity;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -9,8 +8,6 @@ import android.widget.TextView;
 
 import com.eirinitelevantou.drcy.R;
 import com.eirinitelevantou.drcy.util.PrefsHelper;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -57,16 +54,15 @@ public class SettingsActivity extends BaseActivity {
                     break;
                 }
                 case PrefsHelper.AUTH_TYPE_GOOGLE:{
-                    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-                    Uri personPhoto = acct.getPhotoUrl();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    txtUsername.setText(user.getDisplayName());
+                    email.setText(user.getEmail());
                     Picasso.with(this)
-                            .load(personPhoto)
+                            .load(firebaseAuth.getCurrentUser().getPhotoUrl())
                             .resize(150, 150)
                             .centerCrop()
                             .placeholder(R.drawable.ic_user_white)
                             .into(imgUser);
-                    txtUsername.setText(acct.getDisplayName());
-                    email.setText(acct.getEmail());
                     break;
                 }
                 case PrefsHelper.AUTH_TYPE_FACEBOOK:{

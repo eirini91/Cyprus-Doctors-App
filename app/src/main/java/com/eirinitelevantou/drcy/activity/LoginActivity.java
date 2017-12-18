@@ -38,6 +38,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Arrays;
 
@@ -236,6 +237,7 @@ private GoogleSignInClient googleSignInClient;
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, gso);
 
@@ -250,7 +252,32 @@ private GoogleSignInClient googleSignInClient;
         LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
 
     }
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            PrefsHelper.setLoggedIn(true, PrefsHelper.AUTH_TYPE_GOOGLE);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        } else {
+                            MaterialDialog dialog = new MaterialDialog.Builder(LoginActivity.this)
+                                    .title(R.string.auth_failed)
+                                    .content(task.getException().getLocalizedMessage())
+                                    .positiveText(android.R.string.ok)
+                                    .show();
+                            progressDialog.dismiss();
+                        }
+
+                        // ...
+                    }
+                });
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -269,12 +296,8 @@ private GoogleSignInClient googleSignInClient;
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            firebaseAuthWithGoogle(account);
 
-            Log.d(TAG, "signInWithEmail:success");
-            PrefsHelper.setLoggedIn(true, PrefsHelper.AUTH_TYPE_GOOGLE);
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
         } catch (ApiException e) {
             MaterialDialog dialog = new MaterialDialog.Builder(LoginActivity.this)
                     .title(R.string.auth_failed)
