@@ -3,6 +3,7 @@ package com.eirinitelevantou.drcy.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -133,6 +134,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
     Button writeAReview;
     @BindView(R.id.reviews_list)
     RecyclerView reviewsList;
+    ProgressDialog progressDialog;
 
     private ReviewAdapter adapter;
     ArrayList<Review> reviews;
@@ -180,6 +182,34 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
             writeAReview.setAlpha(0.5f);
             alreadyRated = true;
         }
+        double average = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).average("Rating");
+
+        long allReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).count();
+        long fiveReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId",  doctor.getId()).equalTo("Rating", 5.0).count();
+        long fourReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 4.0).count();
+        long threeReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 3.0).count();
+        long twoReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 2.0).count();
+        long oneReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 1.0).count();
+
+        int progress1 = oneReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / oneReviewsCount);
+        int progress2 = twoReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / twoReviewsCount);
+        int progress3 = threeReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / threeReviewsCount);
+        int progress4 = fourReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / fourReviewsCount);
+        int progress5 = fiveReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / fiveReviewsCount);
+        ratingBar.setRating(Float.valueOf(String.valueOf(average)));
+        peopleCount.setText(String.format("%d", allReviewsCount));
+        rating.setText(average + "");
+        fivePeopleCount.setText(fiveReviewsCount + "");
+        fourPeopleCount.setText(fourReviewsCount + "");
+        threePeopleCount.setText(threeReviewsCount + "");
+        twoPeopleCount.setText(twoReviewsCount + "");
+        onePeopleCount.setText(oneReviewsCount + "");
+        oneProgress.setProgress(progress1);
+        twoProgress.setProgress(progress2);
+        threeProgress.setProgress(progress3);
+        fourProgress.setProgress(progress4);
+        fiveProgress.setProgress(progress5);
+
     }
 
     private void populateViews() {
@@ -304,10 +334,11 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng sydney = getLocationFromAddress(doctor.getAddress());
-        googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title(getString(R.string.doctor_location)));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.0f));
-
+        if(sydney!=null) {
+            googleMap.addMarker(new MarkerOptions().position(sydney)
+                    .title(getString(R.string.doctor_location)));
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.0f));
+        }
     }
 
     public LatLng getLocationFromAddress(String strAddress) {
@@ -433,6 +464,8 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
                     .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            progressDialog = ProgressDialog.show(DetailsActivity.this, "",
+                                    "Loading. Please wait...", true);
                             View view = dialog.getCustomView();
                             final RatingBar ratingBar = view.findViewById(R.id.rating_bar);
                             final EditText reviewEditText = view.findViewById(R.id.review);
@@ -453,7 +486,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
                                             .setField("isAnonymised", "en-US", switchAnonymous.isChecked())
                                             .setField("rating", "en-US", ratingBar.getRating())
                                             .setField("doctorId", "en-US", doctor.getId())
-                                            .setField("userImageUrl", "en-US", currentUser.getImageUrl());
+                                            .setField("userImageUrl", "en-US", currentUser.getImageUrl()).setId(currentUser.getUserId() + "-" + doctor.getId());
                             client.entries()
                                     .async()
                                     .create(
@@ -474,11 +507,12 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
                                                                         protected void onSuccess(CMAEntry result) {
                                                                             // Successfully published.
                                                                             Toast.makeText(DetailsActivity.this, getString(R.string.review_added), Toast.LENGTH_SHORT).show();
+                                                                            progressDialog.dismiss();
 
                                                                             Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
                                                                                 @Override
                                                                                 public void execute(Realm realm) {
-                                                                                    Review review = new Review(currentUser.getUserId() + "-" + doctor.getId(), reviewEditText.getText().toString(), currentUser.getUserId(), switchAnonymous.isChecked(), Double.valueOf(String.valueOf(ratingBar.getRating())), doctor.getId(), currentUser.getUserName());
+                                                                                    Review review = new Review(currentUser.getUserId() + "-" + doctor.getId(), reviewEditText.getText().toString(), currentUser.getUserId(), switchAnonymous.isChecked(), Double.valueOf(String.valueOf(ratingBar.getRating())), doctor.getId(), currentUser.getUserName(), currentUser.getImageUrl());
                                                                                     realm.copyToRealmOrUpdate(review);
                                                                                     reviews.add(review);
                                                                                     adapter.notifyDataSetChanged();
@@ -495,6 +529,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
                                                                                     .setMessage("Could not publish an entry." +
                                                                                             "\n\nReason: " + exception.toString())
                                                                                     .show();
+                                                                            progressDialog.dismiss();
 
                                                                             super.onFailure(exception);
                                                                         }
@@ -509,8 +544,9 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
                                                             .setTitle("Contentful Error")
                                                             .setMessage("Could not create an entry." +
                                                                     "\n\nReason: " + exception.toString())
-                                                            .show();
 
+                                                            .show();
+                                                    progressDialog.dismiss();
                                                     super.onFailure(exception);
                                                 }
                                             }
@@ -544,7 +580,13 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
         TextView username = v.findViewById(R.id.username);
         RatingBar ratingBar = v.findViewById(R.id.rating_bar);
         TextView reviewLarge = v.findViewById(R.id.review);
-        username.setText(review.getUserName());
+
+        if (review.getUserName() != null && !review.getAnonymised())
+            username.setText((review.getUserName()));
+        else {
+            username.setText(R.string.anonymous);
+        }
+
         ratingBar.setRating(Float.valueOf(String.valueOf(review.getRating())));
         reviewLarge.setText(review.getReview());
         MaterialDialog dialog = new MaterialDialog.Builder(this)
@@ -559,6 +601,5 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
                 })
                 .show();
     }
-
 
 }

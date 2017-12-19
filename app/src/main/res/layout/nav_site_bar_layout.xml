@@ -155,6 +155,7 @@
                 android:id="@+id/settings"
                 android:layout_below="@+id/my_reviews"
                 android:padding="8dp"
+                android:visibility="gone"
                 android:background="@drawable/primary_grey_ripple"
                 android:clickable="true"
                 android:orientation="horizontal"
@@ -228,7 +229,7 @@
                     android:layout_marginLeft="8dp"
                     android:textAllCaps="true"
                     
-                    android:text="Info and Terms"
+                    android:text="@string/info_and_terms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

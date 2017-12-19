@@ -43,7 +43,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 import static com.eirinitelevantou.drcy.activity.SearchResultsActivity.BUNDLE_KEY_FAVOURITES;
 import static com.eirinitelevantou.drcy.activity.SearchResultsActivity.BUNDLE_KEY_TOP;
@@ -131,14 +130,14 @@ public class MainActivity extends BaseActivity {
         vault.requestSync(SyncConfig.builder().setClient(DrApp.getInstance().getClient()).build());
         List<ReviewCF> reviewCFList = vault.fetch(ReviewCF.class).all();
 
-        Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                RealmResults<Review> results = realm.where(Review.class).findAll();
-                results.deleteAllFromRealm();
-
-            }
-        });
+//        Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                RealmResults<Review> results = realm.where(Review.class).findAll();
+//                results.deleteAllFromRealm();
+//
+//            }
+//        });
 
         for (ReviewCF reviewCF : reviewCFList) {
             final Review review = new Review(reviewCF);
@@ -156,27 +155,16 @@ public class MainActivity extends BaseActivity {
 
     public void updateDoctors(ArrayList<Doctor> allDoctors) {
         for (final Doctor doctor : allDoctors) {
-            double ratingSum = 0.0;
-            int ratingCount;
-            RealmResults<Review> reviewRealmList = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("hide", false).findAll();
 
-            if (reviewRealmList != null) {
-                ratingCount = reviewRealmList.size();
+            final double average = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("hide", false).average("Rating");
 
-                for (Review review : reviewRealmList) {
-                    ratingSum += review.getRating();
+            if(doctor.getRating()!=average && !Double.isNaN(average))
+            Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    doctor.setRating(average);
                 }
-
-                final double fRatingSum = ratingSum / ratingCount;
-                if (!doctor.getRating().equals(fRatingSum)) {
-                    Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            doctor.setRating(fRatingSum);
-                        }
-                    });
-                }
-            }
+            });
         }
     }
 
@@ -184,7 +172,7 @@ public class MainActivity extends BaseActivity {
         if (PrefsHelper.isLoggedIn()) {
             txtLogout.setText(getString(R.string.logout));
             myReviews.setAlpha(1.0f);
-            settings.setAlpha(1.0f);
+//            settings.setAlpha(1.0f);
             userLayout.setVisibility(View.VISIBLE);
 
             switch (PrefsHelper.getLoggedInType()) {
@@ -228,7 +216,7 @@ public class MainActivity extends BaseActivity {
             txtLogout.setText(getString(R.string.login));
             userLayout.setVisibility(View.GONE);
             myReviews.setAlpha(0.5f);
-            settings.setAlpha(0.5f);
+//            settings.setAlpha(0.5f);
         }
     }
 
@@ -261,7 +249,8 @@ public class MainActivity extends BaseActivity {
                 if (!PrefsHelper.isLoggedIn()) {
                     Toast.makeText(this, R.string.not_logged_in, Toast.LENGTH_SHORT).show();
                 } else {
-
+                    intent = new Intent(this, MyReviewsActivity.class);
+                    startActivity(intent);
                 }
                 break;
             case R.id.settings:
@@ -295,6 +284,8 @@ public class MainActivity extends BaseActivity {
 
                 break;
             case R.id.info:
+                intent = new Intent(this, InfoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.search_category:
                 intent = new Intent(this, SpecialtyActivity.class);

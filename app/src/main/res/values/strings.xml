@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="google_maps_key">AIzaSyDvCUkROJeEpzsQyvPygIveVXVsyTWeyXE</string>
     <string name="app_name">CyDr</string>
@@ -166,5 +166,42 @@
     <string name="_4_star_min">4 Stars min</string>
     <string name="_5_star_min">5 Stars min</string>
     <string name="search_by_rating">Search doctors by Rating</string>
+    <string name="view_doctor">View Doctor</string>
+    <string name="edit_review">Edit Review</string>
+    <string name="review_updated">Review Updated</string>
+    <string name="posted_as_anonymous">Posted as Anonymous</string>
+    <string name="send_password_reset_email">Send password reset email</string>
+    <string name="email_required">Email cannot be null</string>
+    <string name="password_reset_send">We have sent you instructions to reset your password!</string>
+    <string name="password_reset_failed">Failed to send reset email!</string>
 
+
+    <string name="terms_long" tools:ignore="TypographyOther"><![CDATA[<p><strong>Reviews</strong></p>
+<p>Dr.CY does not edit or control the Reviews posted to or distributed on this Application. Dr.CY nevertheless reserves the right for any reason in its sole discretion to remove without notice any User reviews.</p>
+<p>By using the Review posting functionality of the app, you expressly agree not to post, upload to, transmit, distribute, store, create or otherwise publish through this App any of the following:</p>
+<ol>
+<li>Any message, data, information, text or any other material ("Content") that is false, unlawful, misleading, libelous, defamatory, obscene, pornographic, indecent, lewd, suggestive, harassing, or advocates harassment of another person, threatening, invasive of privacy or publicity rights, abusive, inflammatory, fraudulent or otherwise objectionable;</li>
+<li>Content that is patently offensive to the online community, such as content that promotes racism, bigotry, hatred or physical harm of any kind against any group or individual;</li>
+<li>Content that would constitute, encourage, promote or provide instructions for a conduct of an illegal activity, criminal offense, give rise to civil liability, violate the rights of any party in any country of the world, or that would otherwise create liability or violate any local, state, national or international law.</li>
+<li>Content that provides instructional information about illegal activities such as making or buying illegal weapons, violating someone\'s privacy, or providing or creating computer viruses;</li>
+<li>Content that may infringe any patent, trademark, trade secret, copyright or other intellectual or proprietary right of any party. In particular, content that promotes an illegal or unauthorized copy of another person\'s copyrighted work, such as providing pirated computer programs or links to them, providing information to circumvent manufacture-installed copy-protect devices, or providing pirated music or links to pirated music files;</li>
+<li>Content that impersonates any person or entity or otherwise misrepresents your affiliation with a person or entity, including Dr.CY;</li>
+<li>Unsolicited promotions, mass mailings or "spamming", transmission of "junk mail", "chain letters", political campaigning, advertising, contests, raffles, or solicitations;</li>
+<li>Content containing commercial activities and/or sales without our prior written consent such as contests, sweepstakes, barter, advertising, and pyramid schemes;</li>
+<li>Private information of any third party, including, without limitation, surname (family name) addresses, phone numbers, email addresses, Social Security numbers and credit card numbers;</li>
+<li>Contains restricted or password only access pages, or hidden pages or images (those not linked to or from another accessible page);</li>
+<li>Viruses, corrupted data or other harmful, disruptive or destructive files;</li>
+<li>Content that is unrelated to the topic of the Interactive Area(s) in which such Content is posted; or</li>
+<li>Content or links to content that, in the sole judgment of Dr.CY, (a) violates the previous subsections herein, (b) is objectionable, (c) which restricts or inhibits any other person from using or enjoying the Interactive Areas or this App, or (d) which may expose Dr.CY or its affiliates or its users to any harm or liability of any type.</li>
+</ol>
+<p>Dr.CY takes no responsibility and assumes no liability for any Content posted, stored or uploaded by you or any third party, or for any loss or damage thereto, nor is Dr.CY liable for any mistakes, defamation, slander, libel, omissions, falsehoods, obscenity, pornography or profanity you may encounter. As a provider of interactive services, Dr.CY is not liable for any statements, representations or Content provided by its users in any public forum, personal home page or other Interactive Area. Although Dr.CY has no obligation to screen, edit or monitor any of the Content posted to or distributed through any Interactive Area, Dr.CY reserves the right, and has absolute discretion, to remove, screen, translate or edit without notice any Content posted or stored on this Application at any time and for any reason, or to have such actions performed by third parties on its behalf, and you are solely responsible for creating backup copies of and replacing any Content you post or store on this Application at your sole cost and expense.</p>
+<p>If it is determined that you retain moral rights (including rights of attribution or integrity) in the Content, you hereby declare that (a) you do not require that any personally identifying information be used in connection with the Content, or any derivative works of or upgrades or updates thereto; (b) you have no objection to the publication, use, modification, deletion and exploitation of the Content by Dr.CY or its licensees, successors and assigns; © you forever waive and agree not to claim or assert any entitlement to any and all moral rights of an author in any of the Content; and (d) you forever release Dr.CY, and its licensees, successors and assigns, from any claims that you could otherwise assert against Dr.CY by virtue of any such moral rights.</p>
+<p>Any use of the Interactive Areas or other portions of this Application in violation of the foregoing violates the terms of this Agreement and may result in, among other things, termination or suspension of your rights to use the Interactive Areas and/or this Application.</p>
+<p><strong>Notice and Take-Down Policy for illegal content</strong></p>
+<p>Dr.CY operates on a "notice and takedown" basis. If you have any complaints or objections to material or content including User Reviews posted on this Application, or if you believe that material or content posted on this App infringes a copyright that you hold, please contact us immediately by following our notice and takedown procedure.Sent an email to <a href="mailto:drcyapp@gmail.com">drcyapp@gmail.com</a> to notify us. Once this procedure has been followed Dr.CY will make all reasonable endeavours to remove illegal content within a reasonable time.</p>
+<h2><span style="color: #4b67a1;"></span></h2>]]></string>
+    <string name="terms">Terms</string>
+    <string name="libraries">Libraries</string>
+    <string name="medical_icons_made_by_freepik_https_www_flaticon_com_packs_medical_asserts_3_from_www_flaticon_com">- Medical Icons made by Freepik https://www.flaticon.com/packs/medical-asserts/3 from www.flaticon.com</string>
+    <string name="info_and_terms">Info and Terms</string>
 </resources>

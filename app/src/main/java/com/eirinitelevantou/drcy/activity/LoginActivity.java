@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
@@ -17,6 +18,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.eirinitelevantou.drcy.R;
 import com.eirinitelevantou.drcy.util.PrefsHelper;
@@ -55,7 +57,7 @@ public class LoginActivity extends BaseActivity {
     private static final int RC_SIGN_IN = 1111;
 
     private FirebaseAuth firebaseAuth;
-private GoogleSignInClient googleSignInClient;
+    private GoogleSignInClient googleSignInClient;
     @BindView(R.id.login_progress)
     ProgressBar loginProgress;
     @BindView(R.id.email)
@@ -78,7 +80,7 @@ private GoogleSignInClient googleSignInClient;
     LinearLayout emailLoginForm;
     @BindView(R.id.login_form)
     ScrollView loginForm;
-    CallbackManager  callbackManager;
+    CallbackManager callbackManager;
     ProgressDialog progressDialog;
 
     @Override
@@ -113,7 +115,6 @@ private GoogleSignInClient googleSignInClient;
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         handleFacebookAccessToken(loginResult.getAccessToken());
-
 
                     }
 
@@ -157,7 +158,6 @@ private GoogleSignInClient googleSignInClient;
                     }
                 });
     }
-
 
     private void attemptLogin() {
         String emailTxt = email.getText().toString();
@@ -226,6 +226,53 @@ private GoogleSignInClient googleSignInClient;
         return password.length() > 4;
     }
 
+    @OnClick(R.id.forgot_password)
+    public void onForgotPassword() {
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View v = layoutInflater.inflate(R.layout.layout_forgot_pass_dialog, null);
+
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.forgot_password)
+                .customView(v, true)
+                .neutralText(R.string.cancel)
+                .positiveText(R.string.send_password_reset_email)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        EditText emailEdit = dialog.getCustomView().findViewById(R.id.email);
+                        if(!(TextUtils.isEmpty(emailEdit.getText()))) {
+                            progressDialog = ProgressDialog.show(LoginActivity.this, "",
+                                    "Loading. Please wait...", true);
+                            firebaseAuth.sendPasswordResetEmail(emailEdit.getText().toString())
+                                    .addOnCompleteListener(new OnCompleteListener() {
+                                        @Override
+                                        public void onComplete(@NonNull Task task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(LoginActivity.this, R.string.password_reset_send, Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, R.string.password_reset_failed, Toast.LENGTH_SHORT).show();
+                                            }
+                                            progressDialog.dismiss();
+                                        }
+                                    });
+                        }else{
+                            Toast.makeText(LoginActivity.this, R.string.email_required, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                })
+
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction
+                            which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+
+    }
+
     @OnClick(R.id.skip)
     public void onViewClicked() {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -245,13 +292,13 @@ private GoogleSignInClient googleSignInClient;
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-
     @OnClick(R.id.fb)
     public void onFBClicked() {
 
         LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
 
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
@@ -304,7 +351,8 @@ private GoogleSignInClient googleSignInClient;
                     .content(e.getLocalizedMessage())
                     .positiveText(android.R.string.ok)
                     .show();
-            progressDialog.dismiss();
+            if (progressDialog != null)
+                progressDialog.dismiss();
         }
     }
 }

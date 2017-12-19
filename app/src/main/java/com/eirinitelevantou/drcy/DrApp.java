@@ -143,6 +143,9 @@ public class DrApp extends Application {
         if(doctorRealmResults == null || doctorRealmResults.size()==0) {
             doctors = new Gson().fromJson(loadJSONFromAsset(), DoctorList.class).getDoctors();
 
+            for(Doctor doctor:doctors){
+                doctor.setRating(0.0);
+            }
             Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {

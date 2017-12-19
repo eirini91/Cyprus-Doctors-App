@@ -36,7 +36,7 @@ public class Review extends RealmObject {
 
     }
 
-    public Review(String id, String review, String userId, Boolean isAnonymised, Double rating, Integer doctorId, String userName) {
+    public Review(String id, String review, String userId, Boolean isAnonymised, Double rating, Integer doctorId, String userName, String userImageUrl) {
         Id = id;
         Review = review;
         UserId = userId;
@@ -44,6 +44,7 @@ public class Review extends RealmObject {
         Rating = rating;
         DoctorId = doctorId;
         UserName = userName;
+        UserImageUrl = userImageUrl;
     }
 
     public String getId() {
