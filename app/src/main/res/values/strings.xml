@@ -21,6 +21,8 @@
     <string name="specialty">Specialty</string>
     <string name="search">Search</string>
     <string name="all">All</string>
+    <string name="all_doctors">All Doctors</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -30,9 +32,6 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="create_an_account">Create an account</string>
     <string name="facebook_app_id">1520843247993478</string>
@@ -132,10 +131,10 @@
     <string name="private_expl">Doctors working privately</string>
     <string name="public_exp">Doctors working for public hospitals</string>
     <string name="military_expl">Doctors working for the military</string>
-    <string name="inter_expl">Doctors working for both the public and the private sector per 15 days.</string>
+    <string name="inter_expl">Doctors working for both the public and the private sector per 15 days</string>
     <string name="specialty_expl">Doctors still doing their specialty/training</string>
     <string name="all_sectors">All Sectors</string>
-    <string name="all_expl">Show all doctors regardless of doctors</string>
+    <string name="all_expl">Show all doctors regardless of dector</string>
     <string name="no_results_found">No results found</string>
     <string name="use_without_account">Use without account</string>
     <string name="skip">skip</string>
@@ -204,4 +203,12 @@
     <string name="libraries">Libraries</string>
     <string name="medical_icons_made_by_freepik_https_www_flaticon_com_packs_medical_asserts_3_from_www_flaticon_com">- Medical Icons made by Freepik https://www.flaticon.com/packs/medical-asserts/3 from www.flaticon.com</string>
     <string name="info_and_terms">Info and Terms</string>
+    <string name="post_anonymously">Post Anonymously</string>
+    <string name="doctor_info">Doctor Info</string>
+    <string name="doctor_data_expl">All Doctor Data has been taken fron the Pagkiprios Iatrikos Sillogos website http://www.cyma.org.cy/el/page/katalogos-iatron?mid=145. The data might not be up to date or correct at any point. Dr.CY holds no responsibility for wrong data.</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="docros_contact_expl">If for any reason you want to be taken down from the app, disable reviewing or get advertised in the app email drcyapp@gmail.com and we will be happy to assist you.</string>
+    <string name="for_doctors">For Doctors</string>
+    <string name="users_contact_expl">For any questions or queries email drcyapp@gmail.com and we will be happy to assist you.</string>
+    <string name="for_users">For Users</string>
 </resources>

@@ -89,7 +89,7 @@
                     android:layout_marginLeft="8dp"
                     android:textAllCaps="true"
 
-                    android:text="@string/all"
+                    android:text="@string/all_doctors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

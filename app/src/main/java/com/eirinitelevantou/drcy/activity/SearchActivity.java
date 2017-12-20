@@ -293,7 +293,7 @@ public class SearchActivity extends BaseActivity {
     @OnClick(R.id.layout_speciality)
     public void onSpecialtyClicked() {
 
-        Specialty specialty = new Specialty(1000, "All", R.drawable.ic_list);
+        Specialty specialty = new Specialty(1000, getString(R.string.all), R.drawable.ic_list);
         List<Specialty> specialtyArrayList = new ArrayList<>();
         specialtyArrayList.add(specialty);
         specialtyArrayList.addAll(DrApp.getInstance().getSpecialtyArrayList());
