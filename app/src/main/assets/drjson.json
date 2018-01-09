@@ -6148,7 +6148,7 @@
       "Tel": "22603490",
       "Languages": "Greek",
       "Address": "ΓΕΝ. ΝΟΣΟΚΟΜΕΙΟ ΛΕΥΚΩΣΙΑΣ, ΛΕΥΚΩΣΙΑ",
-      "City": null,
+      "City": 0,
       "Website": ""
     },
     {
@@ -6157,12 +6157,12 @@
       "Speciality": "31",
       "Sex": 0,
       "Sector": 0,
-      "Uni": "",
-      "Tel": "",
+      "Uni": "SEMMELWEIS ΒΟΥΔΑΠΕΣΤΗΣ",
+      "Tel": "24647087",
       "Languages": "Greek",
-      "Address": "",
-      "City": null,
-      "Website": ""
+      "Address": "ΚΛΙΝΙΚΗ ΤΙΜΙΟΣ ΣΤΑΥΡΟΣ, ΟΔΟΣ ΡΑΦΑΗΛ ΣΑΝΤΗ, ΛΑΡΝΑΚΑ",
+      "City": 2,
+      "Website": "http://www.timiosstavroshospital.com"
     },
     {
       "Id": 485,
@@ -6171,23 +6171,23 @@
       "Sex": 0,
       "Sector": 0,
       "Uni": "",
-      "Tel": "",
+      "Tel": "22356654",
       "Languages": "Greek",
-      "Address": "",
-      "City": null,
+      "Address": "ΑΙΠΕΙΑΣ 5, ΕΓΚΩΜΗ, ΛΕΥΚΩΣΙΑ",
+      "City": 0,
       "Website": ""
     },
     {
       "Id": 486,
-      "Name": "Δρ ΔΗΜΗΤΡΙΑΔΗΣ ΑΝΔΡΕΑΣ.",
+      "Name": "Δρ ΔΗΜΗΤΡΙΑΔΗΣ ΑΝΔΡΕΑΣ",
       "Speciality": "8",
       "Sex": 0,
       "Sector": 0,
       "Uni": "",
-      "Tel": "",
+      "Tel": "22421494",
       "Languages": "Greek",
-      "Address": "",
-      "City": null,
+      "Address": "Λεωφ. Στροβόλου 39, ΛΕΥΚΩΣΙΑ",
+      "City": 0,
       "Website": ""
     },
     {
