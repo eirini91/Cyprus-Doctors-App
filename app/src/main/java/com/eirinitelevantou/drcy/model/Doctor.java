@@ -32,7 +32,8 @@ public class Doctor extends RealmObject {
      * City : 0
      * Website : https://www.iator.com.cy/
      */
-
+    @SerializedName("Desc")
+    private String Desc;
     @PrimaryKey
     @SerializedName("Id")
     private int Id;
@@ -134,6 +135,14 @@ public class Doctor extends RealmObject {
         }
         return "";
 
+    }
+
+    public String getDesc() {
+        return Desc;
+    }
+
+    public void setDesc(String desc) {
+        Desc = desc;
     }
 
     public void setSpeciality(String Speciality) {

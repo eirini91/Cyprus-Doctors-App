@@ -211,4 +211,5 @@
     <string name="for_doctors">For Doctors</string>
     <string name="users_contact_expl">For any questions or queries email drcyapp@gmail.com and we will be happy to assist you.</string>
     <string name="for_users">For Users</string>
+    <string name="description">Description</string>
 </resources>

@@ -135,6 +135,10 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
     @BindView(R.id.reviews_list)
     RecyclerView reviewsList;
     ProgressDialog progressDialog;
+    @BindView(R.id.txt_description)
+    TextView txtDescription;
+    @BindView(R.id.desc_layout)
+    LinearLayout descLayout;
 
     private ReviewAdapter adapter;
     ArrayList<Review> reviews;
@@ -185,7 +189,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
         double average = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).average("Rating");
 
         long allReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).count();
-        long fiveReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId",  doctor.getId()).equalTo("Rating", 5.0).count();
+        long fiveReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 5.0).count();
         long fourReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 4.0).count();
         long threeReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 3.0).count();
         long twoReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 2.0).count();
@@ -239,6 +243,14 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
         } else {
             txtAddress.setText(doctor.getCityString(this));
         }
+
+
+        if (!TextUtils.isEmpty(doctor.getDesc())) {
+            txtDescription.setText((doctor.getDesc()));
+            descLayout.setVisibility(View.VISIBLE);
+
+        }
+
 
         if (!TextUtils.isEmpty(doctor.getWebsite())) {
             txtWeb.setText(doctor.getWebsite());
@@ -334,7 +346,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng sydney = getLocationFromAddress(doctor.getAddress());
-        if(sydney!=null) {
+        if (sydney != null) {
             googleMap.addMarker(new MarkerOptions().position(sydney)
                     .title(getString(R.string.doctor_location)));
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.0f));

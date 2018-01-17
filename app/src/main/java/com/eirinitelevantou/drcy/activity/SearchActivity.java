@@ -286,6 +286,8 @@ public class SearchActivity extends BaseActivity {
         intent.putExtra(SearchResultsActivity.BUNDLE_KEY_SECTOR, (int) swipeSector.getSelectedItem().value);
 
         intent.putExtra(SearchResultsActivity.BUNDLE_KEY_CITIES, city);
+        intent.putExtra(SearchResultsActivity.BUNDLE_KEY_SEARCH, true);
+
         startActivity(intent);
 
     }

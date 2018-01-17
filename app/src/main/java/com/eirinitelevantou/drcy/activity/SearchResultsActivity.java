@@ -12,6 +12,7 @@ import com.eirinitelevantou.drcy.DrApp;
 import com.eirinitelevantou.drcy.R;
 import com.eirinitelevantou.drcy.adapter.DoctorAdapter;
 import com.eirinitelevantou.drcy.model.Doctor;
+import com.eirinitelevantou.drcy.model.Specialty;
 import com.eirinitelevantou.drcy.util.ProjectUtils;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
     public static final String BUNDLE_KEY_SECTOR = "kSector";
     public static final String BUNDLE_KEY_FAVOURITES = "kFavourites";
     public static final String BUNDLE_KEY_TOP = "kTop";
+    public static final String BUNDLE_KEY_SEARCH = "kSearch";
 
     @BindView(R.id.txt_empty)
     TextView txtEmpty;
@@ -46,6 +48,7 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
     private DoctorAdapter adapter;
     private boolean isFavourite;
     private boolean isTop;
+    private boolean isSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
         sector = getIntent().getIntExtra(BUNDLE_KEY_SECTOR, -1);
         isFavourite = getIntent().getBooleanExtra(BUNDLE_KEY_FAVOURITES, false);
         isTop = getIntent().getBooleanExtra(BUNDLE_KEY_TOP, false);
+        isSearch = getIntent().getBooleanExtra(BUNDLE_KEY_SEARCH, false);
 
         adapter = new DoctorAdapter(this, this, doctors);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -87,6 +91,7 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
                         if (!cities.contains(doctor.getCity())) {
                             add = false;
                         }
+
                     }
 
                     if (specialties != null && specialties.size() > 0) {
@@ -123,6 +128,7 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
 
             }
         } else {
+            setTitle(getString(R.string.top_doctors));
             doctors.addAll(ProjectUtils.getTop20(allDoctors, this));
         }
 
@@ -133,6 +139,59 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
             txtEmpty.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
+
+        if (isFavourite) {
+            setTitle(getString(R.string.favourites));
+
+        }
+        if (!isSearch) {
+            if (minRating > 0) {
+                setTitle(getString(R.string.rating) + " > " + minRating);
+
+            }
+
+            if (specialties != null && specialties.size() > 0) {
+                String specialty = "";
+                for (Specialty specialty1 : DrApp.getInstance().getSpecialtyArrayList()) {
+                    if (specialties.contains(specialty1.getId())) {
+
+                        specialty = specialty1.getName();
+                        break;
+                    }
+                }
+                setTitle(specialty);
+
+            }
+
+            if (cities != null && (cities.size() == 1)) {
+
+                switch (cities.get(0)) {
+                    case 0: {
+                        setTitle(getString(R.string.nicosia_cyprus));
+                        break;
+                    }
+                    case 1: {
+                        setTitle(getString(R.string.limassol_cuprus));
+                        break;
+                    }
+                    case 2: {
+                        setTitle(getString(R.string.larnaca_cyprus));
+                        break;
+                    }
+                    case 3: {
+                        setTitle(getString(R.string.paphos_cyprus));
+                        break;
+                    }
+                    case 4: {
+                        setTitle(getString(R.string.famagusta_cyprus));
+                        break;
+                    }
+
+                }
+
+            }
+        }
+
         adapter.notifyDataSetChanged();
 
     }
