@@ -51,11 +51,12 @@ public class ProjectUtils {
 //            switch (PrefsHelper.getLoggedInType()){
 //                case PrefsHelper.AUTH_TYPE_FIREBASE:{
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        userToReturn.setUserName(user.getDisplayName());
-        userToReturn.setEmail(user.getEmail());
-        userToReturn.setUserId(user.getUid());
-        if (user.getPhotoUrl() != null)
-            userToReturn.setImageUrl(user.getPhotoUrl().toString());
+       if(user!=null) {
+           userToReturn.setUserName(user.getDisplayName());
+           userToReturn.setEmail(user.getEmail());
+           userToReturn.setUserId(user.getUid());
+           if (user.getPhotoUrl() != null)
+               userToReturn.setImageUrl(user.getPhotoUrl().toString());
 //                    break;
 //                }
 //                case PrefsHelper.AUTH_TYPE_GOOGLE:{
@@ -77,6 +78,7 @@ public class ProjectUtils {
 //                    break;
 //                }
 //            }
+       }
         return userToReturn;
     }
 

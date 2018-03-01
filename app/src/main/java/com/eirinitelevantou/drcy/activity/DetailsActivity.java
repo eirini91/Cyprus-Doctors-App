@@ -177,43 +177,46 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
     }
 
     private void updateUi() {
-        Review results = Realm.getDefaultInstance().where(Review.class).equalTo("Id", ProjectUtils.getCurrentUser(this).getUserId() + "-" + doctor.getId()).findFirst();
+        User user = ProjectUtils.getCurrentUser(this);
 
-        if (results == null) {
-            writeAReview.setAlpha(1.0f);
+        if(user!=null) {
+            Review results = Realm.getDefaultInstance().where(Review.class).equalTo("Id", user.getUserId() + "-" + doctor.getId()).findFirst();
 
-        } else {
-            writeAReview.setAlpha(0.5f);
-            alreadyRated = true;
+            if (results == null) {
+                writeAReview.setAlpha(1.0f);
+
+            } else {
+                writeAReview.setAlpha(0.5f);
+                alreadyRated = true;
+            }
+            double average = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).average("Rating");
+
+            long allReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).count();
+            long fiveReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 5.0).count();
+            long fourReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 4.0).count();
+            long threeReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 3.0).count();
+            long twoReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 2.0).count();
+            long oneReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 1.0).count();
+
+            int progress1 = oneReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / oneReviewsCount);
+            int progress2 = twoReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / twoReviewsCount);
+            int progress3 = threeReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / threeReviewsCount);
+            int progress4 = fourReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / fourReviewsCount);
+            int progress5 = fiveReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / fiveReviewsCount);
+            ratingBar.setRating(Float.valueOf(String.valueOf(average)));
+            peopleCount.setText(String.format("%d", allReviewsCount));
+            rating.setText(average + "");
+            fivePeopleCount.setText(fiveReviewsCount + "");
+            fourPeopleCount.setText(fourReviewsCount + "");
+            threePeopleCount.setText(threeReviewsCount + "");
+            twoPeopleCount.setText(twoReviewsCount + "");
+            onePeopleCount.setText(oneReviewsCount + "");
+            oneProgress.setProgress(progress1);
+            twoProgress.setProgress(progress2);
+            threeProgress.setProgress(progress3);
+            fourProgress.setProgress(progress4);
+            fiveProgress.setProgress(progress5);
         }
-        double average = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).average("Rating");
-
-        long allReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).count();
-        long fiveReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 5.0).count();
-        long fourReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 4.0).count();
-        long threeReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 3.0).count();
-        long twoReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 2.0).count();
-        long oneReviewsCount = Realm.getDefaultInstance().where(Review.class).equalTo("DoctorId", doctor.getId()).equalTo("Rating", 1.0).count();
-
-        int progress1 = oneReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / oneReviewsCount);
-        int progress2 = twoReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / twoReviewsCount);
-        int progress3 = threeReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / threeReviewsCount);
-        int progress4 = fourReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / fourReviewsCount);
-        int progress5 = fiveReviewsCount == 0 ? 0 : (int) ((allReviewsCount * 100.0f) / fiveReviewsCount);
-        ratingBar.setRating(Float.valueOf(String.valueOf(average)));
-        peopleCount.setText(String.format("%d", allReviewsCount));
-        rating.setText(average + "");
-        fivePeopleCount.setText(fiveReviewsCount + "");
-        fourPeopleCount.setText(fourReviewsCount + "");
-        threePeopleCount.setText(threeReviewsCount + "");
-        twoPeopleCount.setText(twoReviewsCount + "");
-        onePeopleCount.setText(oneReviewsCount + "");
-        oneProgress.setProgress(progress1);
-        twoProgress.setProgress(progress2);
-        threeProgress.setProgress(progress3);
-        fourProgress.setProgress(progress4);
-        fiveProgress.setProgress(progress5);
-
     }
 
     private void populateViews() {
