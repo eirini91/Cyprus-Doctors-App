@@ -67,7 +67,7 @@
     <string name="specialty_expl">Ιατροί που δουλέυουν για να πάρουν την Ειδικότητά τους.</string>
     <string name="all_sectors">Όλοι οι τομείς</string>
     <string name="all_expl">Ιατροί από όλους τους τομείς</string>
-    <string name="no_results_found">Δεω βρέθηκαν αποτελέσματα</string>
+    <string name="no_results_found">Δεν βρέθηκαν αποτελέσματα</string>
     <string name="use_without_account">Χρήση χωρίς Λογαριασμό</string>
     <string name="skip">Παράλειψη</string>
     <string name="emtpy_field_warning">Το πεδίο δεν μπορεί να είναι άδειο</string>
