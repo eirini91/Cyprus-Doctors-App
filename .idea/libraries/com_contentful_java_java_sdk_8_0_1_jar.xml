@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="com.contentful.java:java-sdk:8.0.1@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.contentful.java/java-sdk/8.0.1/b094e8c4a685c7757cc580913640cee9cc8a8886/java-sdk-8.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.contentful.java/java-sdk/8.0.1/d8c2f6a4f1040f8201fd5f7cc5c207933cf51047/java-sdk-8.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

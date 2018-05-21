@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="com.contentful.vault:core:3.0.1@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.contentful.vault/core/3.0.1/14df22b21e65a972da74849d9b619c9182ea28fa/core-3.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.contentful.vault/core/3.0.1/96574e06886290050f87e113fb325d6516992e88/core-3.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
