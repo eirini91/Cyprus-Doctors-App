@@ -137,6 +137,29 @@ public class Doctor extends RealmObject {
 
     }
 
+    public String getCityInGreek(Context context) {
+        switch (getCity()) {
+            case 0: {
+                return context.getString(R.string.gr_nicosia_cyprus);
+            }
+            case 1: {
+                return context.getString(R.string.gr_limassol_cuprus);
+            }
+            case 2: {
+                return context.getString(R.string.gr_larnaca_cyprus);
+            }
+            case 3: {
+                return context.getString(R.string.gr_paphos_cyprus);
+            }
+            case 4: {
+                return context.getString(R.string.gr_famagusta_cyprus);
+            }
+
+        }
+        return "";
+
+    }
+
     public String getDesc() {
         return Desc;
     }

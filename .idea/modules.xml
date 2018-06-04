@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\irene\Documents\drdircynew\DrDirCy.iml" filepath="C:\Users\irene\Documents\drdircynew\DrDirCy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DrDirCy.iml" filepath="$PROJECT_DIR$/DrDirCy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/drdircynew.iml" filepath="$PROJECT_DIR$/drdircynew.iml" />
-      <module fileurl="file://C:\Users\eirini.televantou\DrDirCy\drdircynew.iml" filepath="C:\Users\eirini.televantou\DrDirCy\drdircynew.iml" />
     </modules>
   </component>
 </project>

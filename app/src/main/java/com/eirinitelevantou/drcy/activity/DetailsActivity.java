@@ -241,7 +241,7 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback,
         }
 
         if (!TextUtils.isEmpty(doctor.getAddress())) {
-            txtAddress.setText(capitalize(doctor.getAddress()));
+            txtAddress.setText(capitalize(doctor.getAddress()+", " +doctor.getCityInGreek(this)));
 
         } else {
             txtAddress.setText(doctor.getCityString(this));

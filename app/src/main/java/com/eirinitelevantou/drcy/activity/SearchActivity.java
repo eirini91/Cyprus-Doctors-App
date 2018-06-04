@@ -305,6 +305,8 @@ public class SearchActivity extends BaseActivity {
 
                 if(specialty.getId()!=1000){
                     selectedSpecialty = specialty;
+                }else{
+                    selectedSpecialty = null;
                 }
 
                 txtSpeciality.setText(specialty.getName());

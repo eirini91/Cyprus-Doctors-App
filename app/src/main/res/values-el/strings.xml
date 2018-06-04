@@ -59,6 +59,11 @@
     <string name="larnaca_cyprus">Λάρνακα, Κύπρος</string>
     <string name="paphos_cyprus">Πάφος, Κύπρος</string>
     <string name="famagusta_cyprus">Αμμόχωστος, Κύπρος</string>
+    <string name="gr_nicosia_cyprus">Λευκωσία, Κύπρος</string>
+    <string name="gr_limassol_cuprus">Λεμεσός, Κύπρος</string>
+    <string name="gr_larnaca_cyprus">Λάρνακα, Κύπρος</string>
+    <string name="gr_paphos_cyprus">Πάφος, Κύπρος</string>
+    <string name="gr_famagusta_cyprus">Αμμόχωστος, Κύπρος</string>
     <string name="call_permissions_required">Η πραγματοποίηση κλήσης απαιτεί τα δικαιώματα κλήσης.</string>
     <string name="public_exp">Ιατροί που δουλεύουν για το Δημόσιο</string>
     <string name="private_expl">Ιατροί που δουλεύουν Ιδιωτικά</string>

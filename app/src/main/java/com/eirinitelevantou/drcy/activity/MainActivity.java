@@ -121,6 +121,39 @@ public class MainActivity extends BaseActivity {
 
         setupView();
         fetchReviews();
+
+//        StrictMode.ThreadPolicy policy = new
+//                StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.setThreadPolicy(policy);
+//        StringBuilder total = new StringBuilder();
+//
+//        for(int i=1; i<2236; i++){
+//            // Request a string response from the provided URL.
+//            URL url = null;
+//            try {
+//                url = new URL("http://www.cypriahealth.com/viewdoctors/" +i);
+//
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//// 2. Open InputStream to connection
+//            conn.connect();
+//            InputStream in = conn.getInputStream();
+//// 3. Download and decode the string response using builder
+//            StringBuilder stringBuilder = new StringBuilder();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                stringBuilder.append(line);
+//            }
+//                String title = StringUtils.substringBetween(String.valueOf(stringBuilder), "<body>", "</body>");
+//                total.append(title);
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        Log.d(TAG, "onCreate: "+total);
     }
 
     private static final String TAG = "MainActivity";

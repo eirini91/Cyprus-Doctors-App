@@ -85,7 +85,7 @@ public class ProjectUtils {
     public static ArrayList<Doctor> getTop20(ArrayList<Doctor> allDoctors, Context context) {
         ArrayList<Doctor> ratedDoctors = new ArrayList<>();
         for (Doctor doctor : allDoctors) {
-            if (!doctor.getRating().isNaN()) {
+            if (!doctor.getRating().isNaN()&& doctor.getRating()>0.0) {
                 ratedDoctors.add(doctor);
             }
         }

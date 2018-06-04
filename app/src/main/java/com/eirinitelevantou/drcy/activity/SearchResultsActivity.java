@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -81,6 +82,9 @@ public class SearchResultsActivity extends BaseActivity implements DoctorAdapter
                 boolean add = true;
                 if (!isFavourite) {
 
+                    if(doctor.getTel().contains("24840840")){
+                        Log.d("this is it", "populateData: ");
+                    }
                     if (searchTearm != null && searchTearm.length() > 0) {
                         if (!(doctor.getName().toLowerCase().contains(searchTearm.toLowerCase()))) {
                             add = false;
