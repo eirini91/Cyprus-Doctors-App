@@ -7,6 +7,7 @@ import com.eirinitelevantou.drcy.model.Doctor;
 import com.eirinitelevantou.drcy.model.DoctorList;
 import com.eirinitelevantou.drcy.model.Specialty;
 import com.eirinitelevantou.drcy.util.Prefs;
+import com.eirinitelevantou.drcy.util.PrefsHelper;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.gson.Gson;
 
@@ -29,10 +30,11 @@ public class DrApp extends Application {
     ArrayList<Doctor> doctors = new ArrayList<>();
     private List<Specialty> specialtyArrayList = new ArrayList<>();
 
-    private static  DrApp drApp;
+    private static DrApp drApp;
 
     private CDAClient client;
-    public static  DrApp getInstance() {
+
+    public static DrApp getInstance() {
         return drApp;
     }
 
@@ -47,7 +49,17 @@ public class DrApp extends Application {
         Realm.setDefaultConfiguration(config);
         Prefs.initPrefs(getApplicationContext());
 
-        drApp =this;
+        if (PrefsHelper.isFirstRun()) {
+            Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.delete(Doctor.class);
+                    PrefsHelper.setFirstRun(false);
+                }
+            });
+        }
+
+        drApp = this;
         setDoctors();
         setSpecialties();
 
@@ -125,9 +137,8 @@ public class DrApp extends Application {
         drawables.add(R.drawable.brain);
         drawables.add(R.drawable.otoscope);
 
-
         for (int i = 0; i < specialties.length; i++) {
-            Specialty specialty = new Specialty(specialtiesId[i],specialties[i], drawables.get(i));
+            Specialty specialty = new Specialty(specialtiesId[i], specialties[i], drawables.get(i));
             specialtyArrayList.add(specialty);
         }
 
@@ -137,25 +148,26 @@ public class DrApp extends Application {
         return doctors;
     }
 
-    private void setDoctors(){
+    private void setDoctors() {
         RealmResults<Doctor> doctorRealmResults = Realm.getDefaultInstance().where(Doctor.class).findAll();
 
-        if(doctorRealmResults == null || doctorRealmResults.size()==0) {
+        if (doctorRealmResults == null || doctorRealmResults.size() == 0) {
             doctors = new Gson().fromJson(loadJSONFromAsset(), DoctorList.class).getDoctors();
 
-            for(Doctor doctor:doctors){
+            for (Doctor doctor : doctors) {
                 doctor.setRating(0.0);
             }
             Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
-                 realm.copyToRealmOrUpdate(doctors);
+                    realm.copyToRealmOrUpdate(doctors);
                 }
             });
-        }else{
+        } else {
             doctors.addAll(doctorRealmResults);
         }
     }
+
     public void setDoctors(ArrayList<Doctor> doctors) {
         this.doctors = doctors;
     }

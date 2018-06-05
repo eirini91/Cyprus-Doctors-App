@@ -16,6 +16,15 @@ public class PrefsHelper {
     public final static String IS_USER_ALWAYS_ANONYMOUS = "isUserAlwaysAnonymous";
 
 
+       public static boolean isFirstRun() {
+        return Prefs.getBoolean(FIRST_RUN, true);
+    }
+
+    public static void setFirstRun(boolean value) {
+        Prefs.putBoolean(FIRST_RUN, value);
+    }
+
+
     public static boolean isLoggedIn() {
         return Prefs.getBoolean(LOGGED_IN, false);
     }

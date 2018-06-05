@@ -159,18 +159,19 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
 
     private void fetchReviews() {
+        if(isNetworkAvailable()){
         Vault vault = Vault.with(this, CFSpace.class);
         vault.requestSync(SyncConfig.builder().setClient(DrApp.getInstance().getClient()).build());
         List<ReviewCF> reviewCFList = vault.fetch(ReviewCF.class).all();
 
-//        Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                RealmResults<Review> results = realm.where(Review.class).findAll();
-//                results.deleteAllFromRealm();
-//
-//            }
-//        });
+        Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                io.realm.RealmResults<Review> results = realm.where(Review.class).findAll();
+                results.deleteAllFromRealm();
+
+            }
+        });
 
         for (ReviewCF reviewCF : reviewCFList) {
             final Review review = new Review(reviewCF);
@@ -183,8 +184,20 @@ public class MainActivity extends BaseActivity {
         }
 
         updateDoctors(DrApp.getInstance().getDoctors());
-
+}
     }
+
+    private boolean isNetworkAvailable() {
+    android.net.ConnectivityManager manager =
+            (android.net.ConnectivityManager) getSystemService(android.content.Context.CONNECTIVITY_SERVICE);
+    android.net.NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+    boolean isAvailable = false;
+    if (networkInfo != null && networkInfo.isConnected()) {
+        // Network is present and connected
+        isAvailable = true;
+    }
+    return isAvailable;
+}
 
     public void updateDoctors(ArrayList<Doctor> allDoctors) {
         for (final Doctor doctor : allDoctors) {
